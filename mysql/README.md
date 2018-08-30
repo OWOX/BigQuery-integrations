@@ -22,7 +22,7 @@
 
 1. Перейдите в [Google Cloud Platform Console](https://console.cloud.google.com/home/dashboard/) и авторизуйтесь с помощью Google аккаунта, или зарегистрируйтесь, если аккаунта еще нет.
 2. Перейдите в проект с активированным биллингом или [создайте](https://cloud.google.com/billing/docs/how-to/manage-billing-account#create_a_new_billing_account) новый биллинг аккаунт для проекта.
-3. Перейдите в раздел [Cloud Functions](https://console.cloud.google.com/functions/) и нажмите **СОЗДАТЬ ФУНКЦИЮ**. Обратите внимание, что за использование Cloud-функций взимается плата.
+3. Перейдите в раздел [Cloud Functions](https://console.cloud.google.com/functions/) и нажмите **СОЗДАТЬ ФУНКЦИЮ**. Обратите внимание, что за использование Cloud-функций взимается [плата](https://cloud.google.com/functions/pricing).
 4. Заполните следующие поля:
 
     **Название**: *mysql-bq-integration* или любое другое подходящее название;
@@ -44,7 +44,7 @@
 
 ### MySQL
 
-Получите имя пользователя и пароль на MySQL - сервере с правами на чтение, где находится база данных с таблицей. 
+Получите у администраторов вашего MySQL - сервера имя пользователя и пароль с правами на чтение, где находится база данных с таблицей. 
 
 ### BigQuery
 

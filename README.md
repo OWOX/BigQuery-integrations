@@ -3,10 +3,9 @@ Import files from FTP(S), SFTP, MySQL, etc. servers into BigQuery.
 
 ## Общая информация
 
-BigQuery-integrations — это простое решение для передачи файлов с серверов в Google BigQuery с помощью Google Cloud функции. 
-Это решение, безопасное и несложное в использовании, позволяет автоматически выполнять загрузку данных в таблицы Google BigQuery из файла, который регулярно обновляется на серверах с различными протоколами передачи данных.
+BigQuery-integrations — содержит набор python-скриптов для автоматизации импорта данных в [Google BigQuery](https://cloud.google.com/bigquery/) с помощью [Google Cloud функции](https://cloud.google.com/functions/). 
 
-В текущей версии поддерживается импорт файлов из серверов:
+В текущей версии подготовлены скрипты для автоматизации импорта данных в Google BigQuery из таких источников, как:
 
 - [FTP](https://github.com/OWOX/BigQuery-integrations/tree/master/ftp);
 - [FTPS](https://github.com/OWOX/BigQuery-integrations/tree/master/ftps);
@@ -41,6 +40,10 @@ BigQuery-integrations — это простое решение для перед
 - [HTTP(s)](https://github.com/OWOX/BigQuery-integrations/tree/master/https/README.md);
 - [MySQL](https://github.com/OWOX/BigQuery-integrations/tree/master/mysql/README.md);
 - [SFTP](https://github.com/OWOX/BigQuery-integrations/tree/master/sftp/README.md).
+
+## Вопросы
+
+analytics-dev@owox.com
 
 
 
