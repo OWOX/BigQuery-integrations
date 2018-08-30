@@ -3,7 +3,7 @@
 
 ## Общая информация
 
-Модуль sftp-bq-integration предназначен для передачи файлов с SFTP - серверов в Google BigQuery с помощью Google Cloud функции. 
+Модуль **sftp-bq-integration** предназначен для передачи файлов с SFTP - серверов в Google BigQuery с помощью Google Cloud функции. 
 Это решение позволяет автоматически выполнять загрузку данных в Google BigQuery из файла, который регулярно обновляется на SFTP - сервере.
 
 ## Принцип работы
@@ -15,7 +15,7 @@
 
 - проект в Google Cloud Platform с активированным биллингом;
 - доступ с правами на чтение к SFTP - аккаунту на сервере, где расположен файл;
-- доступ на редактирование (роль Редактор данных BigQuery) для сервисного аккаунта Cloud-функции в проекте BigQuery, куда будет загружена таблица (см. раздел Доступы);
+- доступ на редактирование (роль *Редактор данных BigQuery*) для сервисного аккаунта Cloud-функции в проекте BigQuery, куда будет загружена таблица (см. раздел [Доступы](https://github.com/OWOX/BigQuery-integrations/tree/master/sftp#Доступы));
 - HTTP-клиент для выполнения POST запросов, вызывающих Cloud-функцию.
 
 ## Настройка и использование
@@ -24,11 +24,16 @@
 2. Перейдите в проект с активированным биллингом или [создайте](https://cloud.google.com/billing/docs/how-to/manage-billing-account#create_a_new_billing_account) новый биллинг аккаунт для проекта.
 3. Перейдите в раздел [Cloud Functions](https://console.cloud.google.com/functions/) и нажмите **СОЗДАТЬ ФУНКЦИЮ**. Обратите внимание, что за использование Cloud-функций взимается плата.
 4. Заполните следующие поля:
-**Название**: *sftp-bq-integration* или любое другое подходящее название;
-**Выделенный объем памяти**: *2 ГБ* или меньше, в зависимости от размера обрабатываемого файла;
-**Триггер**: *HTTP*;
-**Исходный код**: *Встроенный редактор*;
-**Среда выполнения**: Python 3.X .
+
+    **Название**: *sftp-bq-integration* или любое другое подходящее название;
+    
+    **Выделенный объем памяти**: *2 ГБ* или меньше, в зависимости от размера обрабатываемого файла;
+    
+    **Триггер**: *HTTP*;
+    
+    **Исходный код**: *Встроенный редактор*;
+
+    **Среда выполнения**: Python 3.X .
 5. Скопируйте содержимое файла **main.py** в встроенный редактор, вкладка *main.py*.
 6. Скопируйте содержимое файла **requirements.txt** в встроенный редактор, вкладка *requirements.txt*.
 7. В качестве **вызываемой функции** укажите *sftp*. 
@@ -78,7 +83,7 @@ my_product,40.0
 ,54.0
 …
 ```
-Для правильного определения схемы в таблице, первая строка CSV файла - заголовок - должна содержать только STRING значения, в остальных же строках, хотя бы один столбец должен иметь числовые значения.
+Для правильного определения схемы в таблице, первая строка CSV файла — заголовок — должна содержать только STRING значения, в остальных же строках, хотя бы один столбец должен иметь числовые значения.
 
 ## Использование
 
@@ -111,10 +116,10 @@ my_product,40.0
 | Обязательные параметры |  
 | user | sftp | Имя пользователя на SFTP - сервере, для которого есть доступ с правами на чтение. |
 | psswd | sftp | Пароль к пользователю user на SFTP - сервере. |
-| path_to_file | sftp | Полный путь к файлу на SFTP - сервере. Всегда должен иметь вид: “ftps://host/path/to/file/” |
+| path_to_file | sftp | Полный путь к файлу на SFTP - сервере. Всегда должен иметь вид: “sftp://host/path/to/file/” |
 | project_id | bq | Название проекта в BigQuery, куда будет загружена таблица. Проект может отличаться от того, в котором создана Cloud-функция. |
 | dataset_id | bq | Название датасета в BigQuery, куда будет загружена таблица. |
-| table_id | bq | Название таблицы в BigQuery, в которую будет загружен файл с FTPS-сервера. |
+| table_id | bq | Название таблицы в BigQuery, в которую будет загружен файл с SFTP-сервера. |
 | delimiter | bq | Разделитель для полей в CSV файле. Параметр обязательный, если для source_format выбрано значение “CSV”. Поддерживаются разделители: “,”, “\|”, “\t” |
 | source_format | bq | Формат загружаемого в BigQuery файла. Поддерживаются форматы “NEWLINE_DELIMITED_JSON”, “CSV”. |
 | Опциональные параметры |
@@ -139,7 +144,8 @@ my_product,40.0
 ### Linux 
 Вызовите функцию через терминал Linux:
 
-```curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/ftp/ -H "Content-Type:application/json"  -d 
+```
+curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/sftp/ -H "Content-Type:application/json"  -d 
     '{
        "sftp": 
             {
@@ -163,7 +169,7 @@ my_product,40.0
 ```
 import httplib2
 
-trigger_url = "https://REGION-PROJECT_ID.cloudfunctions.net/ftp/"
+trigger_url = "https://REGION-PROJECT_ID.cloudfunctions.net/sftp/"
 headers = { "Content-Type": "application/json" }
 playload = {
            "sftp": 
@@ -191,7 +197,7 @@ Http().request(trigger_url, "POST", urlencode(playload), headers = headers)
 
 ```
 function runftps() {
-  trigger_url = "https://REGION-PROJECT_ID.cloudfunctions.net/ftp/"
+  trigger_url = "https://REGION-PROJECT_ID.cloudfunctions.net/sftp/"
   var playload = {
                  "sftp": 
                        {

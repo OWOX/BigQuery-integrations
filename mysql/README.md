@@ -3,7 +3,7 @@
 
 ## Общая информация
 
-Модуль mysql-bq-integration предназначен для передачи файлов с MySQL - серверов в Google BigQuery с помощью Google Cloud функции. 
+Модуль **mysql-bq-integration** предназначен для передачи файлов с MySQL - серверов в Google BigQuery с помощью Google Cloud функции. 
 Это решение позволяет автоматически выполнять загрузку данных в Google BigQuery из таблиц, которые регулярно обновляются на MySQL - сервере.
 
 ## Принцип работы
@@ -15,7 +15,7 @@
 
 - проект в Google Cloud Platform с активированным биллингом;
 - доступ с правами на чтение к MySQL - аккаунту на сервере, где расположен файл;
-- доступ на редактирование (роль Редактор данных BigQuery) для сервисного аккаунта Cloud-функции в проекте BigQuery, куда будет загружена таблица (см. раздел Доступы);
+- доступ на редактирование (роль *Редактор данных BigQuery*) для сервисного аккаунта Cloud-функции в проекте BigQuery, куда будет загружена таблица (см. раздел [Доступы](https://github.com/OWOX/BigQuery-integrations/tree/master/mysql#Доступы));
 - HTTP-клиент для выполнения POST запросов, вызывающих Cloud-функцию.
 
 ## Настройка и использование
@@ -24,11 +24,16 @@
 2. Перейдите в проект с активированным биллингом или [создайте](https://cloud.google.com/billing/docs/how-to/manage-billing-account#create_a_new_billing_account) новый биллинг аккаунт для проекта.
 3. Перейдите в раздел [Cloud Functions](https://console.cloud.google.com/functions/) и нажмите **СОЗДАТЬ ФУНКЦИЮ**. Обратите внимание, что за использование Cloud-функций взимается плата.
 4. Заполните следующие поля:
-**Название**: *mysql-bq-integration* или любое другое подходящее название;
-**Выделенный объем памяти**: *2 ГБ* или меньше, в зависимости от размера обрабатываемого файла;
-**Триггер**: *HTTP*;
-**Исходный код**: *Встроенный редактор*;
-**Среда выполнения**: Python 3.X .
+
+    **Название**: *mysql-bq-integration* или любое другое подходящее название;
+
+    **Выделенный объем памяти**: *2 ГБ* или меньше, в зависимости от размера обрабатываемого файла;
+
+    **Триггер**: *HTTP*;
+
+    **Исходный код**: *Встроенный редактор*;
+
+    **Среда выполнения**: Python 3.X.
 5. Скопируйте содержимое файла **main.py** в встроенный редактор, вкладка *main.py*.
 6. Скопируйте содержимое файла **requirements.txt** в встроенный редактор, вкладка *requirements.txt*.
 7. В качестве **вызываемой функции** укажите *mysql*. 
@@ -123,7 +128,8 @@
 
 Вызовите функцию через терминал Linux:
 
-```curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/ftp/ -H "Content-Type:application/json"  -d 
+```
+curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/mysql/ -H "Content-Type:application/json"  -d 
     '{
       "mysql": 
             {
@@ -148,7 +154,7 @@
 ```
 import httplib2
 
-trigger_url = "https://REGION-PROJECT_ID.cloudfunctions.net/ftp/"
+trigger_url = "https://REGION-PROJECT_ID.cloudfunctions.net/mysql/"
 headers = { "Content-Type": "application/json" }
 playload = {
             "mysql": 
