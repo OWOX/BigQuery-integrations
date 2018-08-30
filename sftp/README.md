@@ -102,7 +102,7 @@ my_product,40.0
         {
           "project_id": "my_bq_project",
           "dataset_id": "my_bq_dataset",
-          "table_id": "me_bq_table",
+          "table_id": "my_bq_table",
           "delimiter": ",",
           "source_format": "CSV",
           "location": "US"
@@ -113,7 +113,7 @@ my_product,40.0
 
 | Параметр | Объект | Описание |
 | --- | --- | --- |
-| Обязательные параметры |  
+| > | Обязательные параметры |   
 | user | sftp | Имя пользователя на SFTP - сервере, для которого есть доступ с правами на чтение. |
 | psswd | sftp | Пароль к пользователю user на SFTP - сервере. |
 | path_to_file | sftp | Полный путь к файлу на SFTP - сервере. Всегда должен иметь вид: “sftp://host/path/to/file/” |
@@ -157,7 +157,7 @@ curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/sftp/ -H "Content-Type
             {
               "project_id": "my_bq_project",
               "dataset_id": "my_bq_dataset",
-              "table_id": "me_bq_table",
+              "table_id": "my_bq_table",
               "delimiter": ",",
               "source_format": "CSV",
               "location": "US"
@@ -182,7 +182,7 @@ playload = {
                 {
                   "project_id": "my_bq_project",
                   "dataset_id": "my_bq_dataset",
-                  "table_id": "me_bq_table",
+                  "table_id": "my_bq_table",
                   "delimiter": ",",
                   "source_format": "CSV",
                   "location": "US"
@@ -209,7 +209,7 @@ function runftps() {
                       {
                           "project_id": "my_bq_project",
                           "dataset_id": "my_bq_dataset",
-                          "table_id": "me_bq_table",
+                          "table_id": "my_bq_table",
                           "delimiter": ",",
                           "source_format": "CSV",
                           "location": "US"

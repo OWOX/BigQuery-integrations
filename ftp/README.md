@@ -103,7 +103,7 @@ my_product,40.0
             {
               "project_id": "my_bq_project",
               "dataset_id": "my_bq_dataset",
-              "table_id": "me_bq_table",
+              "table_id": "my_bq_table",
               "delimiter": ",",
               "source_format": "NEWLINE_DELIMITED_JSON",
               "location": "US"
@@ -113,7 +113,7 @@ my_product,40.0
 
 | Параметр | Объект | Описание |
 | --- | --- | --- |
-| Обязательные параметры |  
+| Обязательные параметры |   
 | user | ftp | Имя пользователя на FTP - сервере, для которого есть доступ с правами на чтение. |
 | psswd | ftp | Пароль к пользователю user на FTP - сервере. |
 | path_to_file | ftp | Полный путь к файлу на FTP - сервере. Всегда должен иметь вид: “ftp://host/path/to/file/” |
@@ -158,7 +158,7 @@ curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/ftp/ -H "Content-Type:
                 {
                     "project_id": "my_bq_project",
                     "dataset_id": "my_bq_dataset",
-                    "table_id": "me_bq_table",
+                    "table_id": "my_bq_table",
                     "delimiter": ",",
                     "source_format": "NEWLINE_DELIMITED_JSON",
                     "location": "US"
@@ -184,7 +184,7 @@ playload = {
                         {
                           "project_id": "my_bq_project",
                           "dataset_id": "my_bq_dataset",
-                          "table_id": "me_bq_table",
+                          "table_id": "my_bq_table",
                           "delimiter": ",",
                           "source_format": "NEWLINE_DELIMITED_JSON",
                           "location": "US"
@@ -211,7 +211,7 @@ function runftp() {
                         {
                           "project_id": "my_bq_project",
                           "dataset_id": "my_bq_dataset",
-                          "table_id": "me_bq_table",
+                          "table_id": "my_bq_table",
                           "delimiter": ",",
                           "source_format": "NEWLINE_DELIMITED_JSON",
                           "location": "US"
