@@ -1,5 +1,4 @@
 # Интеграция Google BigQuery и SFTP - серверов
-Документация в [Google Docs](https://docs.google.com/document/d/1ioIxTSH_7jYpDdyewQDdisgZLNw33NOWUdknH80-GD8/edit?usp=sharing)
 
 ## Общая информация
 
