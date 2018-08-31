@@ -1,5 +1,4 @@
 # Интеграция Google BigQuery и MySQL - серверов
-Документация в [Google Docs](https://docs.google.com/document/d/1qD70pE-f-sdXmvaeaUl0NckMERzEjErXdQAoLYIB5T4/edit?usp=sharing)
 
 ## Общая информация
 
