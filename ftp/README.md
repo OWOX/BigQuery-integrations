@@ -1,5 +1,4 @@
 # Интеграция Google BigQuery и FTP - серверов
-Документация в [Google Docs](https://docs.google.com/document/d/1l3bFJQHs_zqJN3drmPG2NtH6p_APmTcGxoxJDZwV-Lk/edit?usp=sharing)
 
 ## Общая информация
 
