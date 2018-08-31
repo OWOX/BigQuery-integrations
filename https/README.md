@@ -1,5 +1,4 @@
 # Интеграция Google BigQuery и HTTPS - серверов
-Документация в [Google Docs](https://docs.google.com/document/d/1bW0L7YTvLoFgRvFAcj51vr2CaRf43vBXQEkqNwCEfQU/edit?usp=sharing)
 
 ## Общая информация
 
