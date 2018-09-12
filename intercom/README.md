@@ -149,7 +149,7 @@ import httplib2
 
 trigger_url = "https://REGION-PROJECT_ID.cloudfunctions.net/intercom/"
 headers = { "Content-Type": "application/json" }
-playload = {
+payload = {
           "intercom": {
             "accessToken": "INTERCOM ACCESS TOKEN",
                 "entities": [
@@ -169,7 +169,7 @@ playload = {
                 "location": "US"
              }
 }
-Http().request(trigger_url, "POST", urlencode(playload), headers = headers)
+Http().request(trigger_url, "POST", urlencode(payload), headers = headers)
 ```
 
 ### [Google Apps Script](https://developers.google.com/apps-script/)
@@ -179,7 +179,7 @@ Http().request(trigger_url, "POST", urlencode(playload), headers = headers)
 ```
 function runftp() {
   trigger_url = "https://REGION-PROJECT_ID.cloudfunctions.net/intercom/"
-  playload = {
+  payload = {
           "intercom": {
             "accessToken": "INTERCOM ACCESS TOKEN",
                 "entities": [
