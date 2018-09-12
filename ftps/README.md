@@ -1,5 +1,4 @@
 # Интеграция Google BigQuery и FTPS - серверов
-Документация в [Google Docs](https://docs.google.com/document/d/190SLawASfRK-qXuu9mPz1Xy3Vimi0Jm0kq_QbLRW7RY/edit?usp=sharing)
 
 ## Общая информация
 
