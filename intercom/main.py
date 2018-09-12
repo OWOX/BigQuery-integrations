@@ -156,6 +156,8 @@ def load_to_gbq(json_file, bq_configuration, entity):
                 )
             ]
         )
+          
+           # If you would like to load data from Custom Fileds - discribe a schema with you Custom Fields. 
            """
              bigquery.SchemaField(mode="NULLABLE", name="custom_attributes", field_type="RECORD", fields = [
                    bigquery.SchemaField(mode="NULLABLE", name="Field_One", field_type="STRING"),
