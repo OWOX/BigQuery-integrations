@@ -67,7 +67,7 @@
 {
   "intercom": {
     "accessToken": "INTERCOM ACCESS TOKEN",
-        "entities": [
+     "entities": [
             "users", 
             "companies", 
             "contacts", 
@@ -123,7 +123,7 @@ curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/intercom/ -H "Content-
     '{
       "intercom": {
         "accessToken": "INTERCOM ACCESS TOKEN",
-            "entities": [
+        "entities": [
                 "users", 
                 "companies", 
                 "contacts", 
@@ -152,7 +152,7 @@ headers = { "Content-Type": "application/json" }
 payload = {
           "intercom": {
             "accessToken": "INTERCOM ACCESS TOKEN",
-                "entities": [
+            "entities": [
                     "users", 
                     "companies", 
                     "contacts", 
@@ -177,12 +177,12 @@ Http().request(trigger_url, "POST", urlencode(payload), headers = headers)
 Вставьте следующий код со своими параметрами и запустите функцию:
 
 ```
-function runftp() {
+function runIntercom() {
   trigger_url = "https://REGION-PROJECT_ID.cloudfunctions.net/intercom/"
   payload = {
           "intercom": {
             "accessToken": "INTERCOM ACCESS TOKEN",
-                "entities": [
+            "entities": [
                     "users", 
                     "companies", 
                     "contacts", 
