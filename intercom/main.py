@@ -156,6 +156,12 @@ def load_to_gbq(json_file, bq_configuration, entity):
                 )
             ]
         )
+           """
+             bigquery.SchemaField(mode="NULLABLE", name="custom_attributes", field_type="RECORD", fields = [
+                   bigquery.SchemaField(mode="NULLABLE", name="Field_One", field_type="STRING"),
+                   bigquery.SchemaField(mode="NULLABLE", name="Field_Two", field_type="STRING")
+            ]
+           """
     ]
 
 
