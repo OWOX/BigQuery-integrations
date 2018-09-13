@@ -7,6 +7,7 @@ BigQuery-integrations — содержит набор python-скриптов д
 
 В текущей версии подготовлены скрипты для автоматизации импорта данных в Google BigQuery из таких источников, как:
 
+- [Intercom](https://github.com/OWOX/BigQuery-integrations/tree/master/intercom);
 - [FTP](https://github.com/OWOX/BigQuery-integrations/tree/master/ftp);
 - [FTPS](https://github.com/OWOX/BigQuery-integrations/tree/master/ftps);
 - [HTTP(s)](https://github.com/OWOX/BigQuery-integrations/tree/master/https);
@@ -23,7 +24,7 @@ BigQuery-integrations — содержит набор python-скриптов д
 
 - проект в Google Cloud Platform с активированным биллингом;
 - доступ с правами на чтение к аккаунту на сервере, где расположен файл;
-- доступ на редактирование (роль Редактор данных BigQuery) для сервисного аккаунта Cloud-функции в проекте BigQuery, куда будет загружена таблица;
+- доступ на редактирование (роль *Редактор данных BigQuery*) и выполнения заданий (роль *Пользователь заданий BigQuery*)  для сервисного аккаунта Cloud-функции в проекте BigQuery, куда будет загружена таблица;
 - HTTP-клиент для выполнения POST запросов, вызывающих Cloud-функцию.
 
 ## Настройка и использование
@@ -35,6 +36,7 @@ BigQuery-integrations — содержит набор python-скриптов д
 
 Подробная документация находится по ссылкам:
 
+- [Intercom](https://github.com/OWOX/BigQuery-integrations/tree/master/intercom/README.md);
 - [FTP](https://github.com/OWOX/BigQuery-integrations/tree/master/ftp/README.md);
 - [FTPS](https://github.com/OWOX/BigQuery-integrations/tree/master/ftps/README.md);
 - [HTTP(s)](https://github.com/OWOX/BigQuery-integrations/tree/master/https/README.md);
