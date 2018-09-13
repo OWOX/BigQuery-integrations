@@ -7,10 +7,10 @@ BigQuery-integrations — содержит набор python-скриптов д
 
 В текущей версии подготовлены скрипты для автоматизации импорта данных в Google BigQuery из таких источников, как:
 
-- [Intercom](https://github.com/OWOX/BigQuery-integrations/tree/master/intercom);
 - [FTP](https://github.com/OWOX/BigQuery-integrations/tree/master/ftp);
 - [FTPS](https://github.com/OWOX/BigQuery-integrations/tree/master/ftps);
 - [HTTP(s)](https://github.com/OWOX/BigQuery-integrations/tree/master/https);
+- [Intercom](https://github.com/OWOX/BigQuery-integrations/tree/master/intercom);
 - [MySQL](https://github.com/OWOX/BigQuery-integrations/tree/master/mysql);
 - [SFTP](https://github.com/OWOX/BigQuery-integrations/tree/master/sftp).
 
@@ -36,10 +36,10 @@ BigQuery-integrations — содержит набор python-скриптов д
 
 Подробная документация находится по ссылкам:
 
-- [Intercom](https://github.com/OWOX/BigQuery-integrations/tree/master/intercom/README.md);
 - [FTP](https://github.com/OWOX/BigQuery-integrations/tree/master/ftp/README.md);
 - [FTPS](https://github.com/OWOX/BigQuery-integrations/tree/master/ftps/README.md);
 - [HTTP(s)](https://github.com/OWOX/BigQuery-integrations/tree/master/https/README.md);
+- [Intercom](https://github.com/OWOX/BigQuery-integrations/tree/master/intercom/README.md);
 - [MySQL](https://github.com/OWOX/BigQuery-integrations/tree/master/mysql/README.md);
 - [SFTP](https://github.com/OWOX/BigQuery-integrations/tree/master/sftp/README.md).
 
