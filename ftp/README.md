@@ -14,7 +14,7 @@
 
 - проект в Google Cloud Platform с активированным биллингом;
 - доступ с правами на чтение к FTP - аккаунту на сервере, где расположен файл;
-- доступ на редактирование (роль *Редактор данных BigQuery*) для сервисного аккаунта Cloud-функции в проекте BigQuery, куда будет загружена таблица (см. раздел [Доступы](https://github.com/OWOX/BigQuery-integrations/tree/master/ftp#Доступы));
+- доступ на редактирование (роль *Редактор данных BigQuery*) и выполнения заданий (роль *Пользователь заданий BigQuery*) для сервисного аккаунта Cloud-функции в проекте BigQuery, куда будет загружена таблица (см. раздел [Доступы](https://github.com/OWOX/BigQuery-integrations/tree/master/ftp#Доступы));
 - HTTP-клиент для выполнения POST запросов, вызывающих Cloud-функцию.
 
 ## Настройка 
@@ -54,7 +54,7 @@
 1. Перейдите в раздел [Cloud Functions](https://console.cloud.google.com/functions/) и кликните по только что созданной функции для того, чтобы открыть окно **Сведения о функции**.
 2. На вкладке **Общие** найдите поле *Сервисный аккаунт* и скопируйте указанный email.
 3. В Google Cloud Platform перейдите в IAM и администрирование - [IAM](https://console.cloud.google.com/iam-admin/iam) и выберите проект, в который будет загружена таблица в BigQuery. 
-4. **Добавьте участника** - скопированный email и укажите для него роль - *Редактор данных BigQuery*. Сохраните участника.
+4. **Добавьте участника** - скопированный email и укажите для него роли - *Редактор данных BigQuery*, *Пользователь заданий BigQuery*). Сохраните участника.
 
 ## Файл
 
@@ -172,7 +172,7 @@ import httplib2
 
 trigger_url = "https://REGION-PROJECT_ID.cloudfunctions.net/ftp/"
 headers = { "Content-Type": "application/json" }
-playload = {
+payload = {
                "ftp": 
                         {
                           "user": "ftp.user_name",
@@ -189,7 +189,7 @@ playload = {
                           "location": "US"
                         }
             }
-Http().request(trigger_url, "POST", urlencode(playload), headers = headers)
+Http().request(trigger_url, "POST", urlencode(payload), headers = headers)
 ```
 
 ### [Google Apps Script](https://developers.google.com/apps-script/)
@@ -199,7 +199,7 @@ Http().request(trigger_url, "POST", urlencode(playload), headers = headers)
 ```
 function runftp() {
   trigger_url = "https://REGION-PROJECT_ID.cloudfunctions.net/ftp/"
-  playload = {
+  payload = {
                "ftp": 
                         {
                           "user": "ftp.user_name",
