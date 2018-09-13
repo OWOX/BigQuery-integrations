@@ -1,5 +1,5 @@
 # BigQuery-integrations
-Import files from FTP(S), SFTP, MySQL, etc. servers into BigQuery.
+Import files (data) from Intercom, FTP(S), SFTP, MySQL, etc. servers into BigQuery.
 
 ## Общая информация
 
