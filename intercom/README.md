@@ -145,7 +145,8 @@ curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/intercom/ -H "Content-
 ### Python
 
 ```
-import httplib2
+from urllib import urlencode
+from httplib2 import Http
 
 trigger_url = "https://REGION-PROJECT_ID.cloudfunctions.net/intercom/"
 headers = { "Content-Type": "application/json" }
