@@ -159,7 +159,8 @@ curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/https/ -H "Content-Typ
 
 ### Python
 ```
-import httplib2
+from urllib import urlencode
+from httplib2 import Http
 
 trigger_url = "https://REGION-PROJECT_ID.cloudfunctions.net/https/"
 headers = { "Content-Type": "application/json" }
