@@ -18,20 +18,24 @@ def get_intercom_data(intercom_configuration, entity):
         "Accept": "application/json"
     }
 
+    data = []
+
     request = requests.get("https://api.intercom.io/" + entity, headers=headers).json()
-    data = request.get(entity)
+    if request.get(entity):
+        data = request.get(entity)
 
     # Getting all pages from request
     if request.get("pages"):
         while request.get("pages").get("next"):
             request = requests.get(request.get("pages").get("next"), headers=headers).json()
-            data += request.get(entity)
+            if request.get(entity):
+                data += request.get(entity)
             print(request.get("pages").get("next"))
     print("Total number of " + entity + " eq " + str(len(data)) + "\nRunning writing data to the file.")
 
 
     # write data in newline delimited JSON file
-    if len(data) > 0:
+    if data:
         with open(entity + '.json', 'w') as outfile:
             for row in data:
                 if "custom_attributes" in row:
@@ -50,6 +54,55 @@ def get_intercom_data(intercom_configuration, entity):
 
 
 
+
+def get_intercom_data_scroll(intercom_configuration, entity):
+
+    """
+        Geeting and transforming Intercom data using Intercom API scroll method to get all users or companies wo limits: https://developers.intercom.com/intercom-api-reference/reference
+    """
+
+    # Build get request
+    headers = {
+        "Authorization": "Bearer " + intercom_configuration["accessToken"],
+        "Accept": "application/json"
+    }
+
+    data = []
+
+    request = requests.get("https://api.intercom.io/" + entity + "/scroll", headers=headers).json()
+    if request.get(entity):
+        data = request.get(entity)
+
+    # Getting all pages from request
+    while request.get("scroll_param"):
+        scroll_param = request.get("scroll_param")
+        request = requests.get("https://api.intercom.io/" + entity + "/scroll?scroll_param=" +scroll_param, headers=headers).json()
+        if request.get(entity):
+            data += request.get(entity)
+    print("Total number of " + entity + " eq " + str(len(data)) + "\nRunning writing data to the file.")
+
+
+    # write data in newline delimited JSON file
+    if data:
+        with open(entity + '.json', 'w') as outfile:
+            for row in data:
+                if "custom_attributes" in row:
+                    """
+                    If you would like to load data from Custom Fileds - remove next row and uncomment next 2 rows below
+                    """
+                    row.pop("custom_attributes")
+                   # custom_attributes = row.get("custom_attributes")
+                   # new_custom_attributes = { key.replace(' ', '_'): value for key, value in custom_attributes.items() }
+                   # row["custom_attributes"] = new_custom_attributes
+
+                outfile.write(json.dumps(row) + os.linesep)
+        outfile.close()
+
+    return entity + '.json'
+
+
+
+
 def load_to_gbq(json_file, bq_configuration, entity):
     """
         Loading data to BigQuery using *bq_configuration* settings.
@@ -62,7 +115,7 @@ def load_to_gbq(json_file, bq_configuration, entity):
     # determine uploading options
     job_config = bigquery.LoadJobConfig()
     job_config.write_disposition = 'WRITE_TRUNCATE'
-    job_config.max_bad_records = 1
+    job_config.max_bad_records = 20
     job_config.source_format = "NEWLINE_DELIMITED_JSON"
 
     # Specifing a schema for users anв contacts and using autodetect for other tables
@@ -156,15 +209,6 @@ def load_to_gbq(json_file, bq_configuration, entity):
                 )
             ]
         )
-          
-           # If you would like to load data from Custom Fileds - discribe a schema with you Custom Fields. 
-           """
-             bigquery.SchemaField(mode="NULLABLE", name="custom_attributes", field_type="RECORD", fields = [
-                   bigquery.SchemaField(mode="NULLABLE", name="Field_One", field_type="STRING"),
-                   bigquery.SchemaField(mode="NULLABLE", name="Field_Two", field_type="STRING")
-            ]
-        )
-           """
     ]
 
 
@@ -176,6 +220,7 @@ def load_to_gbq(json_file, bq_configuration, entity):
     
     source_file.close()
     os.remove(json_file)
+
 
 
 def intercom(request):
@@ -194,6 +239,7 @@ def intercom(request):
     except Exception as error:
         print("An error occured with POST request data.")
         print(str(error))
+
         raise SystemExit
 
    
@@ -202,22 +248,38 @@ def intercom(request):
     
     
     # getting data from intercom
-
     for entity in intercom_configuration["entities"]:
-        try:
-            json_file = get_intercom_data(intercom_configuration, entity)
-        except Exception as error:
-            print("An error occured trying to get data from intercom.")
-            print(str(error))
-            raise SystemExit
         
-        
-        # upload the file to BigQuery
-        if os.path.isfile(json_file):
+        if entity in ("companies", "users"):
             try:
-                load_to_gbq(json_file, bq_configuration, entity)
+                json_file = get_intercom_data_scroll(intercom_configuration, entity)
+
+                # upload the file to BigQuery
+                try:
+                    load_to_gbq(json_file, bq_configuration, entity)
+                except Exception as error:
+                    print("An error occured trying to upload file to Google BigQuery.")
+                    print(str(error))
+                    
+
             except Exception as error:
-                print("An error occured trying to upload file to Google BigQuery.")
+                print("An error occured trying to get data from intercom.")
                 print(str(error))
+        else:
+            try:
+                json_file = get_intercom_data(intercom_configuration, entity)
                 
+                # upload the file to BigQuery
+                try:
+                    load_to_gbq(json_file, bq_configuration, entity)
+                except Exception as error:
+                    print("An error occured trying to upload file to Google BigQuery.")
+                    print(str(error))
+                    
+
+            except Exception as error:
+                print("An error occured trying to get data from intercom.")
+                print(str(error))
+     
+        
     print("All tasks have been completed.")
