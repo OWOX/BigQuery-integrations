@@ -147,7 +147,9 @@ curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/https/ -H "Content-Typ
     '{
         "https": 
                 {
-                    "path_to_file": "https://server_host/path/to/file/"
+                    "path_to_file": "https://server_host/path/to/file/",
+                    "user": "https.user_name",
+                    "psswd": "https.password"
                 },
         "bq":
                 {
@@ -171,7 +173,9 @@ headers = { "Content-Type": "application/json" }
 payload = {
                 "https": 
                         {
-                            "path_to_file": "https://server_host/path/to/file/"
+                            "path_to_file": "https://server_host/path/to/file/",
+                            "user": "https.user_name",
+                            "psswd": "https.password"
                         },
                 "bq":
                         {
@@ -197,7 +201,9 @@ function runhttps() {
   var payload = {
                     "https": 
                             {
-                                "path_to_file": "https://server_host/path/to/file/"
+                                "path_to_file": "https://server_host/path/to/file/",
+                                "user": "https.user_name",
+                                "psswd": "https.password"
                             },
                     "bq":
                             {
