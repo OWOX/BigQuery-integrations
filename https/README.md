@@ -92,7 +92,9 @@ my_product,40.0
 ```
 {
    "https": {
-                "path_to_file": "https://server_host/path/to/file/"
+                "path_to_file": "https://server_host/path/to/file/",
+                "user": "https.user_name",
+                "psswd": "https.password"
             },
    "bq":
             {
@@ -110,6 +112,8 @@ my_product,40.0
 | --- | --- | --- |
 | Обязательные параметры |  
 | path_to_file | https | Ссылка на файл в виде: “https://host/path/to/file/” |
+| user | https | Имя пользователя на https - сервере, для которого есть доступ с правами на чтение. |
+| psswd | https | Пароль к пользователю user на https - сервере. |
 | project_id | bq | Название проекта в BigQuery, куда будет загружена таблица. Проект может отличаться от того, в котором создана Cloud-функция. |
 | dataset_id | bq | Название датасета в BigQuery, куда будет загружена таблица. |
 | table_id | bq | Название таблицы в BigQuery, в которую будет загружен файл. |
