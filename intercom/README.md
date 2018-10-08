@@ -1,5 +1,7 @@
 # Google BigQuery Integration with [Intercom](https://www.intercom.com/)
 
+This documantation is also available in [RU](https://github.com/OWOX/BigQuery-integrations/blob/master/intercom/README_RU.md).
+
 ## About this script
 
 The **intercom-bq-integration**  module lets you automatically upload data from Intercom to Google BigQuery using Google Cloud Functions. 
