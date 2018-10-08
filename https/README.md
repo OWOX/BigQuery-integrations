@@ -1,5 +1,7 @@
 # Google BigQuery Integration with HTTPS - servers
 
+This documantation is also available in [RU](https://github.com/OWOX/BigQuery-integrations/blob/master/ftps/README_RU.md).
+
 ## About this script
 
 The **https-bq-integration** module lets you automatically upload data from the regularly updated file on an HTTPS server 
