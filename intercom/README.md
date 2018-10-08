@@ -18,7 +18,7 @@ Then, uploads it to the corresponding Google BigQuery tables. If the table in th
 - A Google Cloud Platform project with an activated billing account;
 - Access to Intercom with the ability to create Apps;
 - Access to edit and create jobs in Google BigQuery (roles *BigQuery Data Editor* and *BigQuery Job User*) for the Cloud Functions service account in the BigQuery project you want to upload the table to (see the [Access](https://github.com/OWOX/BigQuery-integrations/tree/master/intercom#access) part);
-- An HTTP client for POST requests invoking the Cloud function
+- An HTTP client for POST requests invoking the Cloud function.
 
 ## Setup
 
