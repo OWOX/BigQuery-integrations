@@ -27,7 +27,7 @@ If the table already exists in the selected dataset, it will be rewritten.
 To launch any of these scripts, you need:
 - A Google Cloud Platform project with an activated billing account;
 - Read access to the data source;
-- The *BigQuery Data Editor* and *Job User* roles for the Cloud Functions service account in the BigQuery project to which you are going to upload the table;
+- The *BigQuery Data Editor* and *Job User* roles for the Cloud functions service account in the BigQuery project to which you are going to upload the table;
 - An HTTP client for POST requests invoking the Cloud function.
 
 ## Setup and usage
