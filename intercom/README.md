@@ -110,6 +110,7 @@ Each Cloud Function invocation is being logged. You can view the logs in Google 
 1. The size of the file processed must be no greater than 2Gb.
 2. The Cloud Function invocation timeout must be no greater than 540 seconds.
 
+If one of these limitations is exceeded, you still can invoke the function for each Intercom entity separately. For example, to get data for users and contacts, you need to invoke the function two times. The first time you send the users data to the “entities” field, the second time you send contacts.
 
 ## Sample usage
 
