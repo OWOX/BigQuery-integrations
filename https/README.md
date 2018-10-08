@@ -18,7 +18,7 @@ If the table already exists in the selected dataset, it will be rewritten.
 
 - A Google Cloud Platform project with an activated billing account;
 - Access to the file by an http(s) link;
-- The *BigQuery Data Editor* and *Job User* roles for the Cloud Functions service account in the BigQuery project to which you are going to upload the table (see the [Access](https://github.com/OWOX/BigQuery-integrations/tree/master/https#Access) part of this doc);
+- The *BigQuery Data Editor* and *Job User* roles for the Cloud Functions service account in the BigQuery project to which you are going to upload the table (see the [Access](https://github.com/OWOX/BigQuery-integrations/tree/master/https#access) part of this doc);
 - An HTTP client for POST requests invoking the Cloud function
 
 
@@ -69,7 +69,7 @@ The file schema is automatically defined in BigQuery.
 For the DATE data type to be defined correctly, the values of the field must use the “-” delimiter and have the “YYYY-MM-DD” format.
 
 For the TIMESTAMP data type to be defined correctly, the values of the field must use the “-” delimiter for the date and the “:” delimiter for time. The format must be “YYYY-MM-DD hh:mm:ss”. Here’s the
-([list of possible timestamp formats.](https://cloud.google.com/bigquery/docs/schema-detect#timestamps).
+([list of possible timestamp formats](https://cloud.google.com/bigquery/docs/schema-detect#timestamps)).
 
 ### JSON (newline-delimited)
 
