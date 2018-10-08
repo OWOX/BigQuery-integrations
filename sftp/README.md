@@ -1,5 +1,7 @@
 # Google BigQuery Integration with SFTP - servers
 
+This documantation is also available in [RU](https://github.com/OWOX/BigQuery-integrations/blob/master/sftp/README_RU.md).
+
 ## About this script
 
 The **sftp-bq-integration** module lets you automatically upload data from the regularly updated file on an SFTP server 
@@ -67,7 +69,7 @@ The file schema is automatically defined in BigQuery.
 For the DATE data type to be defined correctly, the values of the field must use the “-” delimiter and have the “YYYY-MM-DD” format.
 
 For the TIMESTAMP data type to be defined correctly, the values of the field must use the “-” delimiter for the date and the “:” delimiter for time. The format must be “YYYY-MM-DD hh:mm:ss”. Here’s the
-([list of possible timestamp formats.](https://cloud.google.com/bigquery/docs/schema-detect#timestamps).
+[list of possible timestamp formats](https://cloud.google.com/bigquery/docs/schema-detect#timestamps).
 
 ### JSON (newline-delimited)
 
@@ -136,7 +138,7 @@ Each Cloud Function invocation is being logged. You can view the logs in Google 
 1. Go to [Cloud Functions](https://console.cloud.google.com/functions/) and click on the function you created to open the **Function details**.
 2. Click **View logs** in the top bar and see the latest logs at the levels *Error* and *Critical*.
 
-Usually, these errors are caused by the issues with accessing the FTPS server, the BigQuery access, or errors in the imported file.
+Usually, these errors are caused by the issues with accessing the SFTP server, the BigQuery access, or errors in the imported file.
 
 ## Limitations
 
