@@ -105,8 +105,6 @@ Each Cloud Function invocation is being logged. You can view the logs in Google 
 1. Go to [Cloud Functions](https://console.cloud.google.com/functions/) and click on the function you created to open the **Function details**.
 2. Click **View logs** in the top bar and see the latest logs at the levels *Error* and *Critical*.
 
-Usually, these errors are caused by the issues with accessing the MySQL server, the BigQuery access, or errors in the imported file.
-
 ## Limitations
 
 1. The size of the file processed must be no greater than 2Gb.
