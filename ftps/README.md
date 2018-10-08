@@ -67,7 +67,7 @@ The file schema is automatically defined in BigQuery.
 For the DATE data type to be defined correctly, the values of the field must use the “-” delimiter and have the “YYYY-MM-DD” format.
 
 For the TIMESTAMP data type to be defined correctly, the values of the field must use the “-” delimiter for the date and the “:” delimiter for time. The format must be “YYYY-MM-DD hh:mm:ss”. Here’s the
-([list of possible timestamp formats](https://cloud.google.com/bigquery/docs/schema-detect#timestamps)).
+[list of possible timestamp formats](https://cloud.google.com/bigquery/docs/schema-detect#timestamps).
 
 ### JSON (newline-delimited)
 
