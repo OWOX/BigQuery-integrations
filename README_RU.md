@@ -1,6 +1,8 @@
 # BigQuery-integrations
 Import files (data) from Intercom, FTP(S), SFTP, MySQL, etc. servers into BigQuery.
 
+This documantation is also available in [RU](https://github.com/OWOX/BigQuery-integrations/blob/master/README_RU.md). 
+
 ## Общая информация
 
 BigQuery-integrations — содержит набор python-скриптов для автоматизации импорта данных в [Google BigQuery](https://cloud.google.com/bigquery/) с помощью [Google Cloud функции](https://cloud.google.com/functions/). 
