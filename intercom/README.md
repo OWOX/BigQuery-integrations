@@ -10,8 +10,7 @@ By default, the module doesn’t support *custom attributes*, yet it’s easy to
 
 
 ## How it works
-
-An HTTP POST request invokes a Cloud Function which gets data from Intercom via the [Intercom API](An HTTP POST request invokes a Cloud Function which gets data from Intercom via the [Intercom API](https://developers.intercom.com/intercom-api-reference/reference). 
+An HTTP POST request invokes a Cloud Function which gets data from Intercom via the [Intercom API](https://developers.intercom.com/intercom-api-reference/reference). 
 Then, uploads it to the corresponding Google BigQuery tables. If the table in the chosen dataset already exists, it will be rewritten.
 
 ## Requirements
