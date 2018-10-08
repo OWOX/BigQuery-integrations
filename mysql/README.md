@@ -1,5 +1,7 @@
 # Google BigQuery Integration with MySQL - servers
 
+This documantation is also available in [RU](https://github.com/OWOX/BigQuery-integrations/blob/master/mysql/README_RU.md).
+
 ## About this script
 
 The **mysql-bq-integration** module lets you automatically upload files from regularly updated tables on MySQL servers to Google BigQuery using Google Cloud Functions.
@@ -15,7 +17,7 @@ If the table already exists in the selected dataset, it will be rewritten.
 
 - A Google Cloud Platform project with an activated billing account;
 - Read access to the data source;
-- The *BigQuery Data Editor* and  *Job User* roles for the Cloud Functions service account in the BigQuery project to which you are going to upload the table (see the [Access](https://github.com/OWOX/BigQuery-integrations/tree/master/mysql#Access) part of this doc);
+- The *BigQuery Data Editor* and  *Job User* roles for the Cloud Functions service account in the BigQuery project to which you are going to upload the table (see the [Access](https://github.com/OWOX/BigQuery-integrations/tree/master/mysql#access) part of this doc);
 - An HTTP client for POST requests invoking the Cloud function
 
 
@@ -66,7 +68,7 @@ The file schema is automatically defined in BigQuery.
 For the DATE data type to be defined correctly, the values of the field must use the “-” delimiter and have the “YYYY-MM-DD” format.
 
 For the TIMESTAMP data type to be defined correctly, the values of the field must use the “-” delimiter for the date and the “:” delimiter for time. The format must be “YYYY-MM-DD hh:mm:ss”. Here’s the
-([list of possible timestamp formats.](https://cloud.google.com/bigquery/docs/schema-detect#timestamps).
+[list of possible timestamp formats](https://cloud.google.com/bigquery/docs/schema-detect#timestamps).
 
 ## Usage
 
