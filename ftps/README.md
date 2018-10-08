@@ -1,5 +1,5 @@
 # Google BigQuery Integration with FTPS - servers
-
+This documantation is also available in [RU](https://github.com/OWOX/BigQuery-integrations/blob/master/ftps/README_RU.md).
 ## About this script
 
 The **ftps-bq-integration** module lets you automatically upload data from the regularly updated file on an FTPS server 
