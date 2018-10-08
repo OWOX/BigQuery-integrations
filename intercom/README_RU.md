@@ -16,7 +16,7 @@
 
 - проект в Google Cloud Platform с активированным биллингом;
 - доступ к Intercom с возможностью создания приложений;
-- доступ на редактирование и создание jobs в Google BigQuery (роль *BigQuery Data Editor* и роль *BigQuery Job User*) для сервисного аккаунта Cloud-функции в проекте BigQuery, куда будет загружена таблица (см. раздел [Доступы](https://github.com/OWOX/BigQuery-integrations/tree/master/intercom#Доступы));
+- доступ на редактирование и создание jobs в Google BigQuery (роль *BigQuery Data Editor* и роль *BigQuery Job User*) для сервисного аккаунта Cloud-функции в проекте BigQuery, куда будет загружена таблица (см. раздел [Доступы](https://github.com/OWOX/BigQuery-integrations/blob/master/intercom/README_RU.md#Доступы));
 - HTTP-клиент для выполнения POST запросов, вызывающих Cloud-функцию.
 
 ## Настройка 
