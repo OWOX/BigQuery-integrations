@@ -18,7 +18,7 @@ If the table already exists in the selected dataset, it will be rewritten.
 
 - A Google Cloud Platform project with an activated billing account;
 - Access to the file by an http(s) link;
-- The *BigQuery Data Editor* and *Job User* roles for the Cloud Functions service account in the BigQuery project to which you are going to upload the table (see the [Access](https://github.com/OWOX/BigQuery-integrations/tree/master/https/README_RU.md#access) part of this doc);
+- The *BigQuery Data Editor* and *Job User* roles for the Cloud Functions service account in the BigQuery project to which you are going to upload the table (see the [Access](https://github.com/OWOX/BigQuery-integrations/blob/master/https/README.md#access) part of this doc);
 - An HTTP client for POST requests invoking the Cloud function
 
 
