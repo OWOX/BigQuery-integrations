@@ -94,7 +94,6 @@ If they are located in different projects, then:
 | psswd | intercom | The list of the Intercom entities which data you want to import to BigQuery. In the sample, we’ve listed all values possible. |
 | project_id | bq | Name of the BigQuery project where the table will be downloaded to. The project may be different from the one where the Cloud Function was created in. |
 | dataset_id | bq | Name of the BigQuery dataset where the table will be uploaded to. |
-| table_id | bq | Name of the BigQuery table where the file from the MySql server will be uploaded to. |
 | Optional properties |
 | location | bq | Geographical location of the table. Default: “US”. |
 
