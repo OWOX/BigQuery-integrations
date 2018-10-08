@@ -1,11 +1,11 @@
 # BigQuery-integrations
 Import files (data) from Intercom, FTP(S), SFTP, MySQL, etc. servers into BigQuery.
 
-## Общая информация
+## What is BigQuery-integrations
 
-BigQuery-integrations — содержит набор python-скриптов для автоматизации импорта данных в [Google BigQuery](https://cloud.google.com/bigquery/) с помощью [Google Cloud функции](https://cloud.google.com/functions/). 
+BigQuery-integrations is a set of Python scripts that let you automate data import to [Google BigQuery](https://cloud.google.com/bigquery/) using [Google Cloud Functions](https://cloud.google.com/functions/). 
 
-В текущей версии подготовлены скрипты для автоматизации импорта данных в Google BigQuery из таких источников, как:
+The current version of BigQuery-integrations features scripts for importing from:
 
 - [FTP](https://github.com/OWOX/BigQuery-integrations/tree/master/ftp);
 - [FTPS](https://github.com/OWOX/BigQuery-integrations/tree/master/ftps);
@@ -15,26 +15,25 @@ BigQuery-integrations — содержит набор python-скриптов д
 - [SFTP](https://github.com/OWOX/BigQuery-integrations/tree/master/sftp).
 
 
-## Принцип работы
+## How it works
 
-С помощью HTTP POST запроса вызывается Cloud-функция, которая получает файл с сервера и загружает его в таблицу Google BigQuery.
-Если таблица уже существует в выбранном датасете, то она будет перезаписана.
+An HTTP POST request invokes a Cloud function that gets the file from the server and uploads it to a BigQuery table. 
+If the table already exists in the selected dataset, it will be rewritten.
 
-## Требования
+## Requirements
 
-- проект в Google Cloud Platform с активированным биллингом;
-- доступ с правами на чтение к аккаунту на сервере, где расположен файл;
-- доступ на редактирование (роль *Редактор данных BigQuery*) и выполнение заданий (роль *Пользователь заданий BigQuery*)  для сервисного аккаунта Cloud-функции в проекте BigQuery, куда будет загружена таблица;
-- HTTP-клиент для выполнения POST запросов, вызывающих Cloud-функцию.
+To launch any of these scripts, you need:
+- A Google Cloud Platform project with an activated billing account;
+- Read access to the data source;
+- The *BigQuery Data Editor* and *Job User* roles for the Cloud Functions service account in the BigQuery project to which you are going to upload the table;
+- An HTTP client for POST requests invoking the Cloud function.
 
-## Настройка и использование
+## Setup and usage
 
-Настройка включает в себя:
-- создание Cloud-функции в Google Cloud Platform;
-- предоставление Cloud-функции доступов к серверу (где расположен файл) и к таблице в BigQuery (куда будет записан импортируемый файл);
-- вызов Cloud-функции через HTTP-клиент.
+To launch the scripts, follow the steps described in the readme files in the function folder. 
+You don’t need to edit the functions’ code.
+The detailed documentation for each function is by the links below:
 
-Подробная документация находится по ссылкам:
 
 - [FTP](https://github.com/OWOX/BigQuery-integrations/tree/master/ftp/README.md);
 - [FTPS](https://github.com/OWOX/BigQuery-integrations/tree/master/ftps/README.md);
@@ -43,9 +42,6 @@ BigQuery-integrations — содержит набор python-скриптов д
 - [MySQL](https://github.com/OWOX/BigQuery-integrations/tree/master/mysql/README.md);
 - [SFTP](https://github.com/OWOX/BigQuery-integrations/tree/master/sftp/README.md).
 
-## Вопросы
+## Questions
 
-analytics-dev@owox.com
-
-
-
+If you have any questions on the BigQuery-integrations scripts, write us at analytics-dev@owox.com.

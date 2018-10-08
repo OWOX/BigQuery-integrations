@@ -1,75 +1,78 @@
-# Интеграция Google BigQuery и MySQL - серверов
+# Google BigQuery Integration with MySQL - servers
 
-## Общая информация
+## About this script
 
-Модуль **mysql-bq-integration** предназначен для передачи файлов с MySQL - серверов в Google BigQuery с помощью Google Cloud функции. 
-Это решение позволяет автоматически выполнять загрузку данных в Google BigQuery из таблиц, которые регулярно обновляются на MySQL - сервере.
+The **mysql-bq-integration** module lets you automatically upload files from regularly updated tables on MySQL servers to Google BigQuery using Google Cloud Functions.
 
-## Принцип работы
 
-С помощью HTTP POST запроса вызывается Cloud-функция, которая получает файл с MySQL - сервера и загружает его в таблицу Google BigQuery.
-Если таблица уже существует в выбранном датасете, то она будет перезаписана.
+## How it works
 
-## Требования
+An HTTP POST request invokes a Cloud function that gets the file from the MySQL server and uploads it to a BigQuery table. 
+If the table already exists in the selected dataset, it will be rewritten.
 
-- проект в Google Cloud Platform с активированным биллингом;
-- доступ с правами на чтение к MySQL - аккаунту на сервере, где расположен файл;
-- доступ на редактирование (роль *Редактор данных BigQuery*) и выполнение заданий (роль *Пользователь заданий BigQuery*) для сервисного аккаунта Cloud-функции в проекте BigQuery, куда будет загружена таблица (см. раздел [Доступы](https://github.com/OWOX/BigQuery-integrations/tree/master/mysql#Доступы));
-- HTTP-клиент для выполнения POST запросов, вызывающих Cloud-функцию.
 
-## Настройка и использование
+## Requirements
 
-1. Перейдите в [Google Cloud Platform Console](https://console.cloud.google.com/home/dashboard/) и авторизуйтесь с помощью Google аккаунта, или зарегистрируйтесь, если аккаунта еще нет.
-2. Перейдите в проект с активированным биллингом или [создайте](https://cloud.google.com/billing/docs/how-to/manage-billing-account#create_a_new_billing_account) новый биллинг аккаунт для проекта.
-3. Перейдите в раздел [Cloud Functions](https://console.cloud.google.com/functions/) и нажмите **СОЗДАТЬ ФУНКЦИЮ**. Обратите внимание, что за использование Cloud-функций взимается [плата](https://cloud.google.com/functions/pricing).
-4. Заполните следующие поля:
+- A Google Cloud Platform project with an activated billing account;
+- Read access to the data source;
+- The *BigQuery Data Editor* and  *Job User* roles for the Cloud Functions service account in the BigQuery project to which you are going to upload the table (see the [Access](https://github.com/OWOX/BigQuery-integrations/tree/master/mysql#Access) part of this doc);
+- An HTTP client for POST requests invoking the Cloud function
 
-    **Название**: *mysql-bq-integration* или любое другое подходящее название;
 
-    **Выделенный объем памяти**: *2 ГБ* или меньше, в зависимости от размера обрабатываемого файла;
+## Setup
 
-    **Триггер**: *HTTP*;
+1. Go to [Google Cloud Platform Console](https://console.cloud.google.com/home/dashboard/) and authorize using a Google account, or sign up if you don’t have an account yet.
+2. Go to the project with billing activated or [create a new billing account](https://cloud.google.com/billing/docs/how-to/manage-billing-account#create_a_new_billing_account) for the project that hasn’t one.
+3. Go to [Cloud Functions](https://console.cloud.google.com/functions/) and click **CREATE FUNCTION**. *Important to note:* using Cloud Functions is billed according to [this pricing](https://cloud.google.com/functions/pricing).
+4. Fill in these fields:
 
-    **Исходный код**: *Встроенный редактор*;
+    **Name**: *mysql-bq-integration* или любое другое подходящее название;
 
-    **Среда выполнения**: Python 3.X.
-5. Скопируйте содержимое файла **main.py** в встроенный редактор, вкладка *main.py*.
-6. Скопируйте содержимое файла **requirements.txt** в встроенный редактор, вкладка *requirements.txt*.
-7. В качестве **вызываемой функции** укажите *mysql*. 
-8. В дополнительных параметрах увеличьте **время ожидания** с *60 сек.* до *540 сек.* или меньшее, в зависимости от размеров обрабатываемого файла.
-9. Завершите создание Cloud-функции, нажав на кнопку **Создать**. 
+    **Memory allocated**: *2Gb* or less depending on the file that is being processed;
 
-## Доступы
+    **Trigger**: *HTTP*;
+
+    **Source code**: *Inline editor*;
+
+    **Runtime**: *Python 3.X*.
+5. Copy the contents of the **main.py** file to the inline editor, the *main.py* tab.
+6. Copy the contents of the **requirements.txt** file to the inline editor, the *requirements.txt* tab.
+7. As a **Function to execute**, state *mysql*. 
+8. In the **Advanced options** set the **Timeout** to *540 seconds* or less depending on the file that is being processed.
+9. Complete creating the Cloud Function by clicking **Create**. 
+
+## Access
 
 ### MySQL
 
-Получите у администраторов вашего MySQL - сервера имя пользователя и пароль с правами на чтение, где находится база данных с таблицей. 
+Acquire the username and password from the MySQL server with the read access, where the database with the table is located.
 
 ### BigQuery
 
-Если проект в [Google Cloud Platform Console](https://console.cloud.google.com/home/dashboard/), в котором расположена Cloud-функция и проект в BigQuery — одинаковые — никаких дополнительных шагов не требуется.
+If the created Cloud Function and the BigQuery project are located in the same [Google Cloud Platform Console](https://console.cloud.google.com/home/dashboard/) project, then you don’t need to take any additional actions.
 
-В случае, если проекты разные:
-1. Перейдите в раздел [Cloud Functions](https://console.cloud.google.com/functions/) и кликните по только что созданной функции для того, чтобы открыть окно **Сведения о функции**.
-2. На вкладке **Общие** найдите поле *Сервисный аккаунт* и скопируйте указанный email.
-3. В Google Cloud Platform перейдите в IAM и администрирование - [IAM](https://console.cloud.google.com/iam-admin/iam) и выберите проект, в который будет загружена таблица в BigQuery. 
-4. **Добавьте участника** - скопированный email и укажите для него роль - *Редактор данных BigQuery*, *Пользователь заданий BigQuery*. Сохраните участника.
+If they are located in different projects, then:
+1. Go to [Cloud Functions](https://console.cloud.google.com/functions/) and click on the function you created to open the **Function details**.
+2. On the **General** tab, find the **Service account** field and copy the email from there.
+3. In Google Cloud Platform, go to **IAM & admin** - [IAM](https://console.cloud.google.com/iam-admin/iam) and select the project where you are going to upload the BigQuery table to.
+4. Click the **+Add** - button above to add a new member. Paste the service account email to the **New members** field and select the roles as *BigQuery Data Editor* and *Job User*. Click **Save**.
 
-## Запрос
+### Query
 
-Данные, которые необходимо загрузить в таблицу BigQuery, будут получены с помощью MySQL-запроса. 
+The data you need to upload to a BigQuery table will be acquired with a MySQL query.
 
-Схема для загружаемого файла определяется автоматически в BigQuery. 
+The file schema is automatically defined in BigQuery. 
 
-Для правильного определения типа DATE, значения этого поля должны использовать разделитель “-” и быть в формате: YYYY-MM-DD .
+For the DATE data type to be defined correctly, the values of the field must use the “-” delimiter and have the “YYYY-MM-DD” format.
 
-Для правильного определения типа TIMESTAMP, значения этого поля должны использовать разделитель “-” (для даты) и “:” для времени и быть в формате: YYYY-MM-DD hh:mm:ss ([список](https://cloud.google.com/bigquery/docs/schema-detect#timestamps) доступных возможностей).
+For the TIMESTAMP data type to be defined correctly, the values of the field must use the “-” delimiter for the date and the “:” delimiter for time. The format must be “YYYY-MM-DD hh:mm:ss”. Here’s the
+([list of possible timestamp formats.](https://cloud.google.com/bigquery/docs/schema-detect#timestamps).
 
-## Использование
+## Usage
 
-1. Перейдите в раздел [Cloud Functions](https://console.cloud.google.com/functions/) и кликните по только что созданной функции для того, чтобы открыть окно **Сведения о функции**.
-2. На вкладке **Триггер** скопируйте *URL-адрес*. 
-С помощью HTTP-клиента отправьте POST запрос по этому *URL-адресу*. Тело запроса должно быть в формате JSON:
+1. Go to [Cloud Functions](https://console.cloud.google.com/functions/) and click on the function you’ve created to open the **Function details**.
+2. On the **Trigger** tab, copy the *URL address*. 
+3. Using an HTTP client, send a POST request to this URL address. The request body must be in the JSON format:
 ```
 {
   "mysql": 
@@ -91,41 +94,42 @@
 }
 ```
 
-| Параметр | Объект | Описание |
+| Property name | Object | Description |
 | --- | --- | --- |
-| Обязательные параметры |  
-| user | mysql | Имя пользователя на MySQL - сервере, для которого есть доступ с правами на чтение. |
-| psswd | mysql | Пароль к пользователю user на MySQL - сервере. |
-| host | mysql | Хост MySQL - сервера. |
-| database | mysql | Имя базы данных на MySQL - сервере. |
-| table_id | mysql | Имя таблицы в database, к которой будет выполнен запрос query. Параметр обязательный, если не указан параметр query. |
-| project_id | bq | Название проекта в BigQuery, куда будет загружена таблица. Проект может отличаться от того, в котором создана Cloud-функция. |
-| dataset_id | bq | Название датасета в BigQuery, куда будет загружена таблица. |
-| table_id | bq | Название таблицы в BigQuery, в которую будут загружены данные с MySQL-сервера. |
-| Опциональные параметры |
-| query | mysql | Запрос, возвращающий данные, которые необходимо загрузить в таблицу BigQuery. Запрос должен обращаться к таблице, указанной в параметре database. Если параметр query не указан, то обращение будет выполнено ко всей таблице table_id. |
-| port | mysql | TCP/IP порт MySQL-сервера. По умолчанию указан 3306. |
-| location | bq | Географическое расположение таблицы. По умолчанию указан “US”. |
+| Required properties |   
+| user | mysql |  Name of the user on the FTPS server, who has the read access. |
+| psswd | mysql | User password on the FTPS server. |
+| host | mysql | MySQL server host. |
+| database | mysql | Database on the MySQL server. |
+| table_id | mysql | Table name in the database. This table will be queried. The property is required if the optional property “query” is not specified. |
+| project_id | bq | Name of the BigQuery project where the table will be uploaded to. The project may be different from the one where the Cloud Function was created in. |
+| dataset_id | bq | Name of the BigQuery dataset where the table will be uploaded to. |
+| table_id | bq | Name of the BigQuery table where the file from the MySql server will be uploaded to. |
+| Optional properties |
+| query | mysql | A query that returns data you need to upload to the BigQuery table. The query must be sent to the table specified in the “database” dimension. If the “query” dimension is not specified, the query will be sent to the whole “table_id” table. |
+| port | mysql | TCP/IP port of the MySQL server. Default: 3306. |
+| location | bq | Geographical location of the table. Default: “US”. |
 
-## Работа с ошибками
+## Troubleshooting
 
-Каждое выполнение Cloud-функции логируется. Логи можно посмотреть в Google Cloud Platform:
+Each Cloud Function invocation is being logged. You can view the logs in Google Cloud Platform:
 
-1. Перейдите в раздел [Cloud Functions](https://console.cloud.google.com/functions/) и кликните по только что созданной функции для того, чтобы открыть окно **Сведения о функции**.
-2. Кликнете **Посмотреть журналы** и посмотрите наиболее новые записи на уровне *Ошибки, Критические ошибки*.
+1. Go to [Cloud Functions](https://console.cloud.google.com/functions/) and click on the function you created to open the **Function details**.
+2. Click **View logs** in the top bar and see the latest logs at the levels *Error* and *Critical*.
 
-Обычно эти ошибки связаны с проблемами доступа к MySQL - серверу, доступа к BigQuery или ошибками в импортируемых данных. 
+Usually, these errors are caused by the issues with accessing the MySQL server, the BigQuery access, or errors in the imported file.
 
-## Ограничения
+## Limitations
 
-1. Размер обрабатываемого файла не должен превышать 2 ГБ.
-2. Время выполнения Cloud-функции не может превышать 540 сек.
+1. The size of the file processed must be no greater than 2Gb.
+2. The Cloud Function invocation timeout must be no greater than 540 seconds.
 
-## Пример использования
+
+## Sample usage
 
 ### Linux 
 
-Вызовите функцию через терминал Linux:
+Invoke the function via the Linux terminal:
 
 ```
 curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/mysql/ -H "Content-Type:application/json"  -d 
@@ -180,7 +184,7 @@ Http().request(trigger_url, "POST", urlencode(payload), headers = headers)
 
 ### [Google Apps Script](https://developers.google.com/apps-script/)
 
-Вставьте следующий код со своими параметрами и запустите функцию:
+Paste this code with your parameters and launch the function:
 
 ```
 function runmysql() {

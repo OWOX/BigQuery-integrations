@@ -1,75 +1,77 @@
-# Интеграция Google BigQuery и FTPS - серверов
+# Google BigQuery Integration with FTPS - servers
 
-## Общая информация
+## About this script
 
-Модуль **ftps-bq-integration** предназначен для передачи файлов с FTPS - серверов в Google BigQuery с помощью Google Cloud функции. 
-Это решение позволяет автоматически выполнять загрузку данных в Google BigQuery из файла, который регулярно обновляется на FTPS - сервере.
+The **ftps-bq-integration** module lets you automatically upload data from the regularly updated file on an FTPS server 
+to Google BigQuery using Google Cloud Functions.
 
-## Принцип работы
 
-С помощью HTTP POST запроса вызывается Cloud-функция, которая получает файл с FTPS - сервера и загружает его в таблицу Google BigQuery.
-Если таблица уже существует в выбранном датасете, то она будет перезаписана.
+## How it works
 
-## Требования
+An HTTP POST request invokes a Cloud function that gets the file from the FTPS server and uploads it to a BigQuery table. 
+If the table already exists in the selected dataset, it will be rewritten.
 
-- проект в Google Cloud Platform с активированным биллингом;
-- доступ с правами на чтение к FTPS - аккаунту на сервере, где расположен файл;
-- доступ на редактирование (роль *Редактор данных BigQuery*) и выполнение заданий (роль *Пользователь заданий BigQuery*) для сервисного аккаунта Cloud-функции в проекте BigQuery, куда будет загружена таблица (см. раздел [Доступы](https://github.com/OWOX/BigQuery-integrations/tree/master/ftps#Доступы));
-- HTTP-клиент для выполнения POST запросов, вызывающих Cloud-функцию.
 
-## Настройка и использование
+## Requirements
 
-1. Перейдите в [Google Cloud Platform Console](https://console.cloud.google.com/home/dashboard/) и авторизуйтесь с помощью Google аккаунта, или зарегистрируйтесь, если аккаунта еще нет.
-2. Перейдите в проект с активированным биллингом или [создайте](https://cloud.google.com/billing/docs/how-to/manage-billing-account#create_a_new_billing_account) новый биллинг аккаунт для проекта.
-3. Перейдите в раздел [Cloud Functions](https://console.cloud.google.com/functions/) и нажмите **СОЗДАТЬ ФУНКЦИЮ**. Обратите внимание, что за использование Cloud-функций взимается [плата](https://cloud.google.com/functions/pricing).
-4. Заполните следующие поля:
+- A Google Cloud Platform project with an activated billing account;
+- Read access to the data source;
+- The *BigQuery Data Editor* and *Job User* roles for the Cloud Functions service account in the BigQuery project to which you are going to upload the table (see the [Access](https://github.com/OWOX/BigQuery-integrations/tree/master/ftps#Access) part of this doc);
+- An HTTP client for POST requests invoking the Cloud function.
 
-    **Название**: *ftps-bq-integration* или любое другое подходящее название;
+## Setup
 
-    **Выделенный объем памяти**: *2 ГБ* или меньше, в зависимости от размера обрабатываемого файла;
+1. Go to [Google Cloud Platform Console](https://console.cloud.google.com/home/dashboard/) and authorize using a Google account, or sign up if you don’t have an account yet.
+2. Go to the project with billing activated or [create a new billing account](https://cloud.google.com/billing/docs/how-to/manage-billing-account#create_a_new_billing_account) for the project that hasn’t one.
+3. Go to [Cloud Functions](https://console.cloud.google.com/functions/) and click **CREATE FUNCTION**. *Important to note:* using Cloud Functions is billed according to [this pricing](https://cloud.google.com/functions/pricing).
+4. Fill in these fields:
 
-    **Триггер**: *HTTP*;
+    **Name**: *ftps-bq-integration* or any other name you see fit;
 
-    **Исходный код**: *Встроенный редактор*;
+    **Memory allocated**: *2Gb* or less depending on the file that is being processed;
 
-    **Среда выполнения**: Python 3.X.
-    
-5. Скопируйте содержимое файла **main.py** в встроенный редактор, вкладка *main.py*.
-6. Скопируйте содержимое файла **requirements.txt** в встроенный редактор, вкладка *requirements.txt*.
-7. В качестве **вызываемой функции** укажите *ftps*. 
-8. В дополнительных параметрах увеличьте **время ожидания** с *60 сек.* до *540 сек.* или меньшее, в зависимости от размеров обрабатываемого файла.
-9. Завершите создание Cloud-функции, нажав на кнопку **Создать**. 
+    **Trigger**: *HTTP*;
 
-## Доступы
+    **Source code**: *Inline editor*;
+
+    **Runtime**: *Python 3.X*.
+5. Copy the contents of the **main.py** file to the inline editor, the *main.py* tab.
+6. Copy the contents of the **requirements.txt** file to the inline editor, the *requirements.txt* tab.
+7. As a **Function to execute**, state *ftps*. 
+8. In the **Advanced options** set the **Timeout** to *540 seconds* or less depending on the file that is being processed.
+9. Complete creating the Cloud Function by clicking **Create**. 
+
+## Access
 
 ### FTPS
 
-Получите у администраторов вашего FTPS - сервера имя пользователя и пароль, где расположен файл с правами на чтение. 
-Убедитесь, что файл может быть получен по стандартному порту управления FTPS-соединением — 21.
+Acquire the username and password from the FTPS server where the read access file is located. 
+Make sure the file can be acquired via the standard FTPS control connection port 21.
 
 ### BigQuery
 
-Если проект в [Google Cloud Platform Console](https://console.cloud.google.com/home/dashboard/), в котором расположена Cloud-функция и проект в BigQuery — одинаковые — никаких дополнительных шагов не требуется.
+If the created Cloud Function and the BigQuery project are located in the same [Google Cloud Platform Console](https://console.cloud.google.com/home/dashboard/) project, then you don’t need to take any additional actions.
 
-В случае, если проекты разные:
-1. Перейдите в раздел [Cloud Functions](https://console.cloud.google.com/functions/) и кликните по только что созданной функции для того, чтобы открыть окно **Сведения о функции**.
-2. На вкладке **Общие** найдите поле *Сервисный аккаунт* и скопируйте указанный email.
-3. В Google Cloud Platform перейдите в IAM и администрирование - [IAM](https://console.cloud.google.com/iam-admin/iam) и выберите проект, в который будет загружена таблица в BigQuery. 
-4. **Добавьте участника** - скопированный email и укажите для него роли - *Редактор данных BigQuery*, *Пользователь заданий BigQuery*). Сохраните участника.
+If they are located in different projects, then:
+1. Go to [Cloud Functions](https://console.cloud.google.com/functions/) and click on the function you created to open the **Function details**.
+2. On the **General** tab, find the **Service account** field and copy the email from there.
+3. In Google Cloud Platform, go to **IAM & admin** - [IAM](https://console.cloud.google.com/iam-admin/iam) and select the project where you are going to upload the BigQuery table to.
+4. Click the **+Add** - button above to add a new member. Paste the service account email to the **New members** field and select the roles as *BigQuery Data Editor* and *Job User*. Click **Save**.
 
-## Файл
+## File
 
-Файл, который необходимо получить с FTPS - сервера может иметь любое подходящее расширение (.json, .txt, .csv), однако он должен быть в одном из следующих форматах: JSON (newline-delimited) или Comma-separated values (CSV). 
+The file you need to acquire from the FTPS server can have any appropriate extension: .json, .txt, .csv. However, it must be in the JSON (newline-delimited) or CSV (Comma-separated values) format.
 
-Схема для загружаемого файла определяется автоматически в BigQuery. 
+The file schema is automatically defined in BigQuery. 
 
-Для правильного определения типа DATE, значения этого поля должны использовать разделитель “-” и быть в формате: YYYY-MM-DD .
+For the DATE data type to be defined correctly, the values of the field must use the “-” delimiter and have the “YYYY-MM-DD” format.
 
-Для правильного определения типа TIMESTAMP, значения этого поля должны использовать разделитель “-” (для даты) и “:” для времени и быть в формате: YYYY-MM-DD hh:mm:ss ([список](https://cloud.google.com/bigquery/docs/schema-detect#timestamps) доступных возможностей).
+For the TIMESTAMP data type to be defined correctly, the values of the field must use the “-” delimiter for the date and the “:” delimiter for time. The format must be “YYYY-MM-DD hh:mm:ss”. Here’s the
+([list of possible timestamp formats.](https://cloud.google.com/bigquery/docs/schema-detect#timestamps).
 
 ### JSON (newline-delimited)
 
-Содержимое файла этого формата должно быть в виде:
+The JSON file contents must look as follows:
 ```
 {"column1": "my_product" , "column2": 40.0}
 {"column1": , "column2": 54.0}
@@ -77,20 +79,21 @@
 ```
 ### CSV
 
-Содержимое файла этого формата должно быть в виде:
+The CSV file contents must look as follows:
 ```
 column1,column2
 my_product,40.0
 ,54.0
 …
 ```
-Для правильного определения схемы в таблице, первая строка CSV файла — заголовок — должна содержать только STRING значения, в остальных же строках, хотя бы один столбец должен иметь числовые значения.
+For the table scheme to be defined correctly, the first line of the CSV file — the header — must contain only the STRING values. 
+In the rest of the lines, at least one column must contain numerical values.
 
-## Использование
+## Usage
 
-1. Перейдите в раздел [Cloud Functions](https://console.cloud.google.com/functions/) и кликните по только что созданной функции для того, чтобы открыть окно **Сведения о функции**.
-2. На вкладке **Триггер** скопируйте *URL-адрес*. 
-С помощью HTTP-клиента отправьте POST запрос по этому *URL-адресу*. Тело запроса должно быть в формате JSON:
+1. Go to [Cloud Functions](https://console.cloud.google.com/functions/) and click on the function you’ve created to open the **Function details**.
+2. On the **Trigger** tab, copy the *URL address*. 
+3. Using an HTTP client, send a POST request to this URL address. The request body must be in the JSON format:
 ```
 {
    "ftps": 
@@ -111,39 +114,40 @@ my_product,40.0
 }
 ```
 
-| Параметр | Объект | Описание |
+| Property name | Object | Description |
 | --- | --- | --- |
-| Обязательные параметры |  
-| user | ftps | Имя пользователя на FTPS - сервере, для которого есть доступ с правами на чтение. |
-| psswd | ftps | Пароль к пользователю user на FTPS - сервере. |
-| path_to_file | ftps | Полный путь к файлу на FTPS - сервере. Всегда должен иметь вид: “ftps://host/path/to/file/” |
-| project_id | bq | Название проекта в BigQuery, куда будет загружена таблица. Проект может отличаться от того, в котором создана Cloud-функция. |
-| dataset_id | bq | Название датасета в BigQuery, куда будет загружена таблица. |
-| table_id | bq | Название таблицы в BigQuery, в которую будет загружен файл с FTPS-сервера. |
-| delimiter | bq | Разделитель для полей в CSV файле. Параметр обязательный, если для source_format выбрано значение “CSV”. Поддерживаются разделители: “,”, “\|”, “\t” |
-| source_format | bq | Формат загружаемого в BigQuery файла. Поддерживаются форматы “NEWLINE_DELIMITED_JSON”, “CSV”. |
-| Опциональные параметры |
-| location | bq | Географическое расположение таблицы. По умолчанию указан “US”. |
+| Required properties |   
+| user | ftps | Name of the user on the FTPS server, who has the read access. |
+| psswd | ftps | User password on the FTPS server. |
+| path_to_file | ftps | Full path to the file on the FTPS server. It always must look like this: “ftps://host/path/to/file/” |
+| project_id | bq | Name of the BigQuery project where the table will be uploaded to. The project may be different from the one where the Cloud Function was created in. |
+| dataset_id | bq | Name of the BigQuery dataset where the table will be uploaded to. |
+| table_id | bq | Name of the BigQuery table where the file from the FTPS server will be uploaded to. |
+| delimiter | bq | Field delimiter in the CSV file. The property is required if you choose CSV as source_format. Supported delimiters are: “,”, “|”, and ”\t”. |
+| source_format | bq | The format of the file uploaded to BigQuery. Supported formats: “NEWLINE_DELIMITED_JSON", “CSV”. |
+| Optional properties |
+| location | bq | Geographical location of the table. Default: “US”. |
 
-## Работа с ошибками
+## Troubleshooting
 
-Каждое выполнение Cloud-функции логируется. Логи можно посмотреть в Google Cloud Platform:
+Each Cloud Function invocation is being logged. You can view the logs in Google Cloud Platform:
 
-1. Перейдите в раздел [Cloud Functions](https://console.cloud.google.com/functions/) и кликните по только что созданной функции для того, чтобы открыть окно **Сведения о функции**.
-2. Кликнете **Посмотреть журналы** и посмотрите наиболее новые записи на уровне *Ошибки, Критические ошибки*.
+1. Go to [Cloud Functions](https://console.cloud.google.com/functions/) and click on the function you created to open the **Function details**.
+2. Click **View logs** in the top bar and see the latest logs at the levels *Error* and *Critical*.
 
-Обычно эти ошибки связаны с проблемами доступа к FTPS - серверу, доступа к BigQuery или ошибками в импортируемом файле. 
+Usually, these errors are caused by the issues with accessing the FTPS server, the BigQuery access, or errors in the imported file.
 
-## Ограничения
+## Limitations
 
-1. Размер обрабатываемого файла не должен превышать 2 ГБ.
-2. Время выполнения Cloud-функции не может превышать 540 сек.
+1. The size of the file processed must be no greater than 2Gb.
+2. The Cloud Function invocation timeout must be no greater than 540 seconds.
 
-## Пример использования
+
+## Sample usage
 
 ### Linux 
 
-Вызовите функцию через терминал Linux:
+Invoke the function via the Linux terminal:
 
 ```
 curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/ftps/ -H "Content-Type:application/json"  -d 
@@ -167,6 +171,7 @@ curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/ftps/ -H "Content-Type
 ```
 
 ### Python
+
 ```
 from urllib import urlencode
 from httplib2 import Http
@@ -195,7 +200,7 @@ Http().request(trigger_url, "POST", urlencode(payload), headers = headers)
 
 ### [Google Apps Script](https://developers.google.com/apps-script/)
 
-Вставьте следующий код со своими параметрами и запустите функцию:
+Paste this code with your parameters and launch the function:
 
 ```
 function runftps() {
@@ -227,3 +232,5 @@ function runftps() {
   var request = UrlFetchApp.fetch(trigger_url, options);
 }
 ```
+
+

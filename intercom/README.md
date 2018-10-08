@@ -1,68 +1,67 @@
-# Интеграция Google BigQuery и [Intercom](https://www.intercom.com/)
+# Google BigQuery Integration with [Intercom](https://www.intercom.com/)
 
-## Общая информация
+## About this script
 
-Модуль **intercom-bq-integration** предназначен для автоматизации передачи данных из Intercom в Google BigQuery с помощью Google Cloud функции.
-В настоящее время модуль позволяет импортировать из Intercom в Google BigQuery такие сущности, как: users,  companies,  contacts,  admins, conversations, teams, tags, segments.
-При этом модуль не поддерживает custom attributes, но это легко исправить. Необходимо: добавить в схему импорта названия и тип полей кастомных полей, а затем удалить из скрипта следующую строку: row.pop("custom_attributes") 
+The **intercom-bq-integration**  module lets you automatically upload data from Intercom to Google BigQuery using Google Cloud Functions. 
+Currently, the module can import these entities: *users*, *companies*, *contacts*, *admins*, *conversations*, *teams*, *tags*, *segments*. 
+By default, the module doesn’t support *custom attributes*, yet it’s easy to fix. To enable *custom attributes*, add to the import schema the names and data type of the custom fields, then delete the line *row.pop("custom_attributes")* from the script.
 
 
-## Принцип работы
+## How it works
 
-С помощью HTTP POST запроса вызывается Cloud-функция, которая получает данные из Intercom, используя [Intercom API](https://developers.intercom.com/intercom-api-reference/reference) и загружает их в соответствующие таблицы Google BigQuery.
-Если таблица уже существует в выбранном датасете, то она будет перезаписана.
+An HTTP POST request invokes a Cloud Function which gets data from Intercom via the [Intercom API](An HTTP POST request invokes a Cloud Function which gets data from Intercom via the [Intercom API](https://developers.intercom.com/intercom-api-reference/reference). 
+Then, uploads it to the corresponding Google BigQuery tables. If the table in the chosen dataset already exists, it will be rewritten.
 
-## Требования
+## Requirements
 
-- проект в Google Cloud Platform с активированным биллингом;
-- доступ к Intercom с возможностью создания приложений;
-- доступ на редактирование и создание jobs в Google BigQuery (роль *BigQuery Data Editor* и роль *BigQuery Job User*) для сервисного аккаунта Cloud-функции в проекте BigQuery, куда будет загружена таблица (см. раздел [Доступы](https://github.com/OWOX/BigQuery-integrations/tree/master/intercom#Доступы));
-- HTTP-клиент для выполнения POST запросов, вызывающих Cloud-функцию.
+- A Google Cloud Platform project with an activated billing account;
+- Access to Intercom with the ability to create Apps;
+- Access to edit and create jobs in Google BigQuery (roles *BigQuery Data Editor* and *BigQuery Job User*) for the Cloud Functions service account in the BigQuery project you want to upload the table to (see the [Access](https://github.com/OWOX/BigQuery-integrations/tree/master/intercom#Access) part);
+- An HTTP client for POST requests invoking the Cloud function
 
-## Настройка 
+## Setup
 
-1. Перейдите в [Google Cloud Platform Console](https://console.cloud.google.com/home/dashboard/) и авторизуйтесь с помощью Google аккаунта, или зарегистрируйтесь, если аккаунта еще нет.
-2. Перейдите в проект с активированным биллингом или [создайте](https://cloud.google.com/billing/docs/how-to/manage-billing-account#create_a_new_billing_account) новый биллинг аккаунт для проекта.
-3. Перейдите в раздел [Cloud Functions](https://console.cloud.google.com/functions/) и нажмите **СОЗДАТЬ ФУНКЦИЮ**. Обратите внимание, что за использование Cloud-функций взимается [плата](https://cloud.google.com/functions/pricing).
-4. Заполните следующие поля:
+1. Go to [Google Cloud Platform Console](https://console.cloud.google.com/home/dashboard/) and authorize using a Google account, or sign up if you don’t have an account yet.
+2. Go to the project with billing activated or [create a new billing account](https://cloud.google.com/billing/docs/how-to/manage-billing-account#create_a_new_billing_account) for the project that hasn’t one.
+3. Go to [Cloud Functions](https://console.cloud.google.com/functions/) and click **CREATE FUNCTION**. *Important to note:* using Cloud Functions is billed according to [this pricing](https://cloud.google.com/functions/pricing).
+4. Fill in these fields:
 
-    **Название**: *intercom-bq-integration* или любое другое подходящее название;
+    **Name**: *intercom-bq-integration* or any other name you see fit;
 
-    **Выделенный объем памяти**: *2 ГБ* или меньше, в зависимости от размера обрабатываемого файла;
+    **Memory allocated**: *2Gb* or less depending on the file that is being processed;
 
-    **Триггер**: *HTTP*;
+    **Trigger**: *HTTP*;
 
-    **Исходный код**: *Встроенный редактор*;
+    **Source code**: *Inline editor*;
 
-    **Среда выполнения**: Python 3.X.
-5. Скопируйте содержимое файла **main.py** в встроенный редактор, вкладка *main.py*.
-6. Скопируйте содержимое файла **requirements.txt** в встроенный редактор, вкладка *requirements.txt*.
-7. В качестве **вызываемой функции** укажите *intercom*. 
-8. В дополнительных параметрах увеличьте **время ожидания** с *60 сек.* до *540 сек.* или меньшее, в зависимости от размеров обрабатываемого файла.
-9. Завершите создание Cloud-функции, нажав на кнопку **Создать**. 
+    **Runtime**: *Python 3.X*.
+5. Copy the contents of the **main.py** file to the inline editor, the *main.py* tab.
+6. Copy the contents of the **requirements.txt** file to the inline editor, the *requirements.txt* tab.
+7. As a **Function to execute**, state *intercom*. 
+8. In the **Advanced options** set the **Timeout** to *540 seconds* or less depending on the file that is being processed.
+9. Complete creating the Cloud Function by clicking **Create**. 
 
-## Доступы
+## Access
 
 ### Intercom
 
-Получите в Intercom Access Token с правами на чтение любых данных. Для этого переходим в Settings → Developers → Create an App. 
-Разрешаем читать любые данные (для этого ставим соответствующие галочки). После создания приложения с нужными правами — скопируйте и сохраните Access Token.
+In Intercom, get Access Token with the read access to any data. To do this, go to **Settings** > **Developers** > **Create an App**. Provide permissions to read any data by checking the corresponding boxes. Once the app is created, copy and save the Access Token.
 
 ### BigQuery
 
-Если проект в [Google Cloud Platform Console](https://console.cloud.google.com/home/dashboard/), в котором расположена Cloud-функция и проект в BigQuery — одинаковые — никаких дополнительных шагов не требуется.
+If the created Cloud Function and the BigQuery project are located in the same [Google Cloud Platform Console](https://console.cloud.google.com/home/dashboard/) project, then you don’t need to take any additional actions.
 
-В случае, если проекты разные:
-1. Перейдите в раздел [Cloud Functions](https://console.cloud.google.com/functions/) и кликните по только что созданной функции для того, чтобы открыть окно **Сведения о функции**.
-2. На вкладке **Общие** найдите поле *Сервисный аккаунт* и скопируйте указанный email.
-3. В Google Cloud Platform перейдите в IAM и администрирование - [IAM](https://console.cloud.google.com/iam-admin/iam) и выберите проект, в который будет загружена таблица в BigQuery. 
-4. **Добавьте участника** - скопированный email и укажите для него роли - *BigQuery Data Editor* и *BigQuery Job User*. Сохраните участника.
+If they are located in different projects, then:
+1. Go to [Cloud Functions](https://console.cloud.google.com/functions/) and click on the function you created to open the **Function details**.
+2. On the **General** tab, find the **Service account** field and copy the email from there.
+3. In Google Cloud Platform, go to **IAM & admin** - [IAM](https://console.cloud.google.com/iam-admin/iam) and select the project where you are going to upload the BigQuery table to.
+4. Click the **+Add** - button above to add a new member. Paste the service account email to the **New members** field and select the roles as *BigQuery Data Editor* and *Job User*. Click **Save**.
 
-## Использование
+## Usage
 
-1. Перейдите в раздел [Cloud Functions](https://console.cloud.google.com/functions/) и кликните по только что созданной функции для того, чтобы открыть окно **Сведения о функции**.
-2. На вкладке **Триггер** скопируйте *URL-адрес*. 
-С помощью HTTP-клиента отправьте POST запрос по этому *URL-адресу*. Тело запроса должно быть в формате JSON:
+1. Go to [Cloud Functions](https://console.cloud.google.com/functions/) and click on the function you’ve created to open the **Function details**.
+2. On the **Trigger** tab, copy the *URL address*. 
+3. Using an HTTP client, send a POST request to this URL address. The request body must be in the JSON format:
 ```
 {
   "intercom": {
@@ -87,36 +86,37 @@
 
 ```
 
-| Параметр | Объект | Описание |
+| Property name | Object | Description |
 | --- | --- | --- |
-| Обязательные параметры |   
-| accessToken | intercom | Ваш Access Token к API Intercom. |
-| entities | intercom  | Список сущностей в Intercom данные о которых вы хотите импортировать в BigQuery. В примере приведен полный список возможных значений. |
-| project_id | bq | Название проекта в BigQuery, куда будет загружена таблица. Проект может отличаться от того, в котором создана Cloud-функция. |
-| dataset_id | bq | Название датасета в BigQuery, куда будет загружена таблица. |
-| Опциональные параметры |
-| location | bq | Географическое расположение таблицы. По умолчанию указан “US”. |
+| Required properties |   
+| accessToken | intercom |  Your Access Token to the Intercom API. |
+| psswd | intercom | The list of the Intercom entities which data you want to import to BigQuery. In the sample, we’ve listed all values possible. |
+| project_id | bq | Name of the BigQuery project where the table will be downloaded to. The project may be different from the one where the Cloud Function was created in. |
+| dataset_id | bq | Name of the BigQuery dataset where the table will be uploaded to. |
+| table_id | bq | Name of the BigQuery table where the file from the MySql server will be uploaded to. |
+| Optional properties |
+| location | bq | Geographical location of the table. Default: “US”. |
 
-## Работа с ошибками
+## Troubleshooting
 
-Каждое выполнение Cloud-функции логируется. Логи можно посмотреть в Google Cloud Platform:
+Each Cloud Function invocation is being logged. You can view the logs in Google Cloud Platform:
 
-1. Перейдите в раздел [Cloud Functions](https://console.cloud.google.com/functions/) и кликните по только что созданной функции для того, чтобы открыть окно **Сведения о функции**.
-2. Кликнете **Посмотреть журналы** и посмотрите наиболее новые записи на уровне *Ошибки, Критические ошибки*.
+1. Go to [Cloud Functions](https://console.cloud.google.com/functions/) and click on the function you created to open the **Function details**.
+2. Click **View logs** in the top bar and see the latest logs at the levels *Error* and *Critical*.
 
-## Ограничения
+Usually, these errors are caused by the issues with accessing the MySQL server, the BigQuery access, or errors in the imported file.
 
-1. Размер обрабатываемого файла не должен превышать 2 ГБ.
-2. Время выполнения Cloud-функции не может превышать 540 сек.
+## Limitations
 
-В случае превышения ожного из лимитов вы можете запускать функцию отдельно для каждой сущности Intercom. 
-Таким образом, чтобы получить данные для users и contacts — вам необходимо выполнить функцию два раз. Первый раз в entities необходимо передать "users", а второй "contacts".
+1. The size of the file processed must be no greater than 2Gb.
+2. The Cloud Function invocation timeout must be no greater than 540 seconds.
 
-## Пример использования
+
+## Sample usage
 
 ### Linux 
 
-Вызовите функцию через терминал Linux:
+Invoke the function via the Linux terminal:
 
 ```
 curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/intercom/ -H "Content-Type:application/json"  -d 
@@ -143,7 +143,6 @@ curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/intercom/ -H "Content-
 ```
 
 ### Python
-
 ```
 from urllib import urlencode
 from httplib2 import Http
@@ -175,7 +174,8 @@ Http().request(trigger_url, "POST", urlencode(payload), headers = headers)
 
 ### [Google Apps Script](https://developers.google.com/apps-script/)
 
-Вставьте следующий код со своими параметрами и запустите функцию:
+Paste this code with your parameters and launch the function:
+
 
 ```
 function runIntercom() {
