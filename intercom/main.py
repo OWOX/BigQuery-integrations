@@ -167,6 +167,7 @@ def load_to_gbq(json_file, bq_configuration, entity):
             bigquery.SchemaField(mode="NULLABLE", name="utm_campaign", field_type="STRING"),
             bigquery.SchemaField(mode="NULLABLE", name="utm_content", field_type="STRING"),
             bigquery.SchemaField(mode="NULLABLE", name="utm_term", field_type="STRING"),
+            bigquery.SchemaField(mode="NULLABLE", name="do_not_track", field_type="STRING"),
 
             bigquery.SchemaField(mode="NULLABLE", name="companies", field_type="RECORD", fields = [
                bigquery.SchemaField(mode="NULLABLE", name="type", field_type="STRING"),
