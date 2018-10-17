@@ -16,7 +16,7 @@
 
 - проект в Google Cloud Platform с активированным биллингом;
 - доступ к Intercom с возможностью создания приложений;
-- доступ на редактирование и создание jobs в Google BigQuery (роль *BigQuery Data Editor* и роль *BigQuery Job User*) для сервисного аккаунта Cloud-функции в проекте BigQuery, куда будет загружена таблица (см. раздел [Доступы](https://github.com/OWOX/BigQuery-integrations/blob/master/intercom/README_RU.md#Доступы));
+- доступ на редактирование *WRITER* к датасету и создание jobs в Google BigQuery (роль *BigQuery Job User*) для сервисного аккаунта Cloud-функции в проекте BigQuery, куда будет загружена таблица (см. раздел [Доступы](https://github.com/OWOX/BigQuery-integrations/blob/master/intercom/README_RU.md#Доступы));
 - HTTP-клиент для выполнения POST запросов, вызывающих Cloud-функцию.
 
 ## Настройка 
@@ -56,7 +56,8 @@
 1. Перейдите в раздел [Cloud Functions](https://console.cloud.google.com/functions/) и кликните по только что созданной функции для того, чтобы открыть окно **Сведения о функции**.
 2. На вкладке **Общие** найдите поле *Сервисный аккаунт* и скопируйте указанный email.
 3. В Google Cloud Platform перейдите в IAM и администрирование - [IAM](https://console.cloud.google.com/iam-admin/iam) и выберите проект, в который будет загружена таблица в BigQuery. 
-4. **Добавьте участника** - скопированный email и укажите для него роли - *BigQuery Data Editor* и *BigQuery Job User*. Сохраните участника.
+4. **Добавьте участника** - скопированный email и укажите для него роль - *Редактор данных BigQuery*. Сохраните участника.
+5. Перейдите к датасету в проекте BigQuery и выдайте доступ на редактирование для сервисного аккаунта. Необходимо [предоставить](https://cloud.google.com/bigquery/docs/datasets#controlling_access_to_a_dataset) *WRITER* доступ к датасету.
 
 ## Использование
 
