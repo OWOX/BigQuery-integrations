@@ -83,7 +83,7 @@ For the TIMESTAMP data type to be defined correctly, the values of the field mus
             "user": "mysql.user",
             "psswd": "mysql.password",
             "host": "host_name",
-            "port”: 3306,
+            "port": 3306,
             "database": "database_name",
             "table_id": "table_name",
             "query": "SELECT * FROM table_name"
