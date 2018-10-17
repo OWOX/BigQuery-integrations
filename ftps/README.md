@@ -16,7 +16,7 @@ If the table already exists in the selected dataset, it will be rewritten.
 
 - A Google Cloud Platform project with an activated billing account;
 - Read access to the data source;
-- The *BigQuery Data Editor* and *Job User* roles for the Cloud Functions service account in the BigQuery project to which you are going to upload the table (see the [Access](https://github.com/OWOX/BigQuery-integrations/tree/master/ftps#access) part of this doc);
+- The *WRITER* access to the dataset and *Job User* roles for the Cloud Functions service account in the BigQuery project to which you are going to upload the table (see the [Access](https://github.com/OWOX/BigQuery-integrations/tree/master/ftps#access) part of this doc);
 - An HTTP client for POST requests invoking the Cloud function.
 
 ## Setup
@@ -56,7 +56,8 @@ If they are located in different projects, then:
 1. Go to [Cloud Functions](https://console.cloud.google.com/functions/) and click on the function you created to open the **Function details**.
 2. On the **General** tab, find the **Service account** field and copy the email from there.
 3. In Google Cloud Platform, go to **IAM & admin** - [IAM](https://console.cloud.google.com/iam-admin/iam) and select the project where you are going to upload the BigQuery table to.
-4. Click the **+Add** - button above to add a new member. Paste the service account email to the **New members** field and select the roles as *BigQuery Data Editor* and *Job User*. Click **Save**.
+4. Click the **+Add** - button above to add a new member. Paste the service account email to the **New members** field and select the *Job User*. Click **Save**.
+5. Go to your BigQuery dataset and share one with the service account email. You need to [grant](https://cloud.google.com/bigquery/docs/datasets#controlling_access_to_a_dataset) *WRITER* access to the dataset. 
 
 ## File
 

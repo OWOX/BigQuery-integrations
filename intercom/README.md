@@ -17,7 +17,7 @@ Then, uploads it to the corresponding Google BigQuery tables. If the table in th
 
 - A Google Cloud Platform project with an activated billing account;
 - Access to Intercom with the ability to create Apps;
-- Access to edit and create jobs in Google BigQuery (roles *BigQuery Data Editor* and *BigQuery Job User*) for the Cloud Functions service account in the BigQuery project you want to upload the table to (see the [Access](https://github.com/OWOX/BigQuery-integrations/tree/master/intercom#access) part);
+- Access to edit and create jobs in Google BigQuery (the *WRITER* access to the dataset and *BigQuery Job User* role) for the Cloud Functions service account in the BigQuery project you want to upload the table to (see the [Access](https://github.com/OWOX/BigQuery-integrations/tree/master/intercom#access) part);
 - An HTTP client for POST requests invoking the Cloud function.
 
 ## Setup
@@ -56,7 +56,8 @@ If they are located in different projects, then:
 1. Go to [Cloud Functions](https://console.cloud.google.com/functions/) and click on the function you created to open the **Function details**.
 2. On the **General** tab, find the **Service account** field and copy the email from there.
 3. In Google Cloud Platform, go to **IAM & admin** - [IAM](https://console.cloud.google.com/iam-admin/iam) and select the project where you are going to upload the BigQuery table to.
-4. Click the **+Add** - button above to add a new member. Paste the service account email to the **New members** field and select the roles as *BigQuery Data Editor* and *Job User*. Click **Save**.
+4. Click the **+Add** - button above to add a new member. Paste the service account email to the **New members** field and select the *Job User*. Click **Save**.
+5. Go to your BigQuery dataset and share one with the service account email. You need to [grant](https://cloud.google.com/bigquery/docs/datasets#controlling_access_to_a_dataset) *WRITER* access to the dataset. 
 
 ## Usage
 
