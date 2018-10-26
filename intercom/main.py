@@ -115,13 +115,58 @@ def load_to_gbq(json_file, bq_configuration, entity):
     # determine uploading options
     job_config = bigquery.LoadJobConfig()
     job_config.write_disposition = 'WRITE_TRUNCATE'
-    job_config.max_bad_records = 20
+    job_config.max_bad_records = 5
     job_config.source_format = "NEWLINE_DELIMITED_JSON"
 
     # Specifing a schema for users anв contacts and using autodetect for other tables
-    if entity != "users" and entity != "contacts":
-        job_config.autodetect = True
-    else:
+
+    if entity == "companies":
+        job_config.schema = [
+            bigquery.SchemaField(name="type", field_type="STRING", mode="NULLABLE"),
+            bigquery.SchemaField(name="company_id", field_type="STRING", mode="NULLABLE"),
+            bigquery.SchemaField(name="id", field_type="STRING", mode="NULLABLE"),
+            bigquery.SchemaField(name="app_id", field_type="STRING", mode="NULLABLE"),
+            bigquery.SchemaField(name="name", field_type="STRING", mode="NULLABLE"),
+
+            bigquery.SchemaField(name="remote_created_at", field_type="TIMESTAMP", mode="NULLABLE"),
+            bigquery.SchemaField(name="created_at", field_type="TIMESTAMP", mode="NULLABLE"),
+            bigquery.SchemaField(name="updated_at", field_type="TIMESTAMP", mode="NULLABLE"),
+            bigquery.SchemaField(name="last_request_at", field_type="TIMESTAMP", mode="NULLABLE"),
+
+            bigquery.SchemaField(name="monthly_spend", field_type="INTEGER", mode="NULLABLE"),
+            bigquery.SchemaField(name="session_count", field_type="INTEGER", mode="NULLABLE"),
+            bigquery.SchemaField(name="user_count", field_type="INTEGER", mode="NULLABLE"),
+
+            bigquery.SchemaField(name="website", field_type="STRING", mode="NULLABLE"),
+            bigquery.SchemaField(name="industry", field_type="STRING", mode="NULLABLE"),
+
+            bigquery.SchemaField(mode="NULLABLE", name="tags", field_type="RECORD", fields = [
+            bigquery.SchemaField(mode="NULLABLE", name="type", field_type="STRING"),
+            bigquery.SchemaField(mode="REPEATED", name="tags", field_type="RECORD", fields = [
+                bigquery.SchemaField(mode="NULLABLE", name="id", field_type="STRING"),
+                bigquery.SchemaField(mode="NULLABLE", name="name", field_type="STRING"),
+                bigquery.SchemaField(mode="NULLABLE", name="type", field_type="STRING")
+                ]),
+            ]
+        ),
+            bigquery.SchemaField(mode="NULLABLE", name="plan", field_type="RECORD", fields = [
+                bigquery.SchemaField(mode="NULLABLE", name="type", field_type="STRING"),
+                bigquery.SchemaField(mode="NULLABLE", name="id", field_type="STRING"),
+                bigquery.SchemaField(mode="NULLABLE", name="name", field_type="STRING")
+            ]
+        ),
+            bigquery.SchemaField(mode="NULLABLE", name="segments", field_type="RECORD", fields = [
+                bigquery.SchemaField(mode="NULLABLE", name="type", field_type="STRING"),
+                bigquery.SchemaField(mode="REPEATED", name="segments", field_type="RECORD", fields = [
+                    bigquery.SchemaField(mode="NULLABLE", name="id", field_type="STRING"),
+                        bigquery.SchemaField(mode="NULLABLE", name="type", field_type="STRING")
+                    ]
+                )
+            ]
+        )]
+
+
+    elif entity == "users" or entity == "contacts":
         job_config.schema = [
             bigquery.SchemaField(name="type", field_type="STRING", mode="NULLABLE"),
             bigquery.SchemaField(name="id", field_type="STRING", mode="NULLABLE"),
@@ -211,6 +256,9 @@ def load_to_gbq(json_file, bq_configuration, entity):
             ]
         )
     ]
+
+    else:
+        job_config.autodetect = True
 
 
     # upload the file to BigQuery table
