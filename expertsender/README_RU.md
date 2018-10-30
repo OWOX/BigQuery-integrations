@@ -105,7 +105,7 @@
 | Параметр | Объект | Описание |
 | --- | --- | --- |
 | Обязательные параметры |   
-| apiKey | expertsender | ExpertSender API-ключ. (см. раздел (https://github.com/OWOX/BigQuery-integrations/blob/master/expertsender/README_RU.md#Доступы)).|
+| apiKey | expertsender | ExpertSender API-ключ. (см. раздел [Доступы](https://github.com/OWOX/BigQuery-integrations/blob/master/expertsender/README_RU.md#Доступы)).|
 | apiAdress | expertsender | ExpertSender APIv2 адресс: Настройки → Субаккаунт → API → Your APIv2 address |
 | date | expertsender | Дата запрашиваемых данных. Должна быть в формате YYYY-MM-DD. |
 | entities | expertsender | Список сущностей в ExpertSender, которые необходимо импортировать в BigQuery. В примере приведен полный список возможных значений. |
