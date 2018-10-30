@@ -11,6 +11,7 @@ BigQuery-integrations — содержит набор python-скриптов д
 - [FTPS](https://github.com/OWOX/BigQuery-integrations/tree/master/ftps);
 - [HTTP(s)](https://github.com/OWOX/BigQuery-integrations/tree/master/https);
 - [Intercom](https://github.com/OWOX/BigQuery-integrations/tree/master/intercom);
+- [ExpertSender](https://github.com/OWOX/BigQuery-integrations/tree/master/expertsender);
 - [MySQL](https://github.com/OWOX/BigQuery-integrations/tree/master/mysql);
 - [SFTP](https://github.com/OWOX/BigQuery-integrations/tree/master/sftp).
 
@@ -40,6 +41,7 @@ BigQuery-integrations — содержит набор python-скриптов д
 - [FTPS](https://github.com/OWOX/BigQuery-integrations/tree/master/ftps/README_RU.md);
 - [HTTP(s)](https://github.com/OWOX/BigQuery-integrations/tree/master/https/README_RU.md);
 - [Intercom](https://github.com/OWOX/BigQuery-integrations/tree/master/intercom/README_RU.md);
+- [ExpertSender](https://github.com/OWOX/BigQuery-integrations/tree/master/expertsender/README_RU.md);
 - [MySQL](https://github.com/OWOX/BigQuery-integrations/tree/master/mysql/README_RU.md);
 - [SFTP](https://github.com/OWOX/BigQuery-integrations/tree/master/sftp/README_RU.md).
 

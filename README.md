@@ -13,6 +13,7 @@ The current version of BigQuery-integrations features scripts for importing from
 - [FTPS](https://github.com/OWOX/BigQuery-integrations/tree/master/ftps);
 - [HTTP(s)](https://github.com/OWOX/BigQuery-integrations/tree/master/https);
 - [Intercom](https://github.com/OWOX/BigQuery-integrations/tree/master/intercom);
+- [ExpertSender](https://github.com/OWOX/BigQuery-integrations/tree/master/expertsender);
 - [MySQL](https://github.com/OWOX/BigQuery-integrations/tree/master/mysql);
 - [SFTP](https://github.com/OWOX/BigQuery-integrations/tree/master/sftp).
 
@@ -41,6 +42,7 @@ The detailed documentation for each function is by the links below:
 - [FTPS](https://github.com/OWOX/BigQuery-integrations/tree/master/ftps/README.md);
 - [HTTP(s)](https://github.com/OWOX/BigQuery-integrations/tree/master/https/README.md);
 - [Intercom](https://github.com/OWOX/BigQuery-integrations/tree/master/intercom/README.md);
+- [ExpertSender (RU)](https://github.com/OWOX/BigQuery-integrations/tree/master/expertsender/README_RU.md);
 - [MySQL](https://github.com/OWOX/BigQuery-integrations/tree/master/mysql/README.md);
 - [SFTP](https://github.com/OWOX/BigQuery-integrations/tree/master/sftp/README.md).
 
