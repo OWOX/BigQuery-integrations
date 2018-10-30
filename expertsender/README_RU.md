@@ -73,7 +73,7 @@
 {
    "expertsender": {
       "apiKey": "ExprtSender API key",
-      "apiAdress": "ExpertSender APIv2 address",
+      "apiAddress": "ExpertSender APIv2 address",
       "date": "YYYY-MM-DD",
       "entities": [
          {
@@ -106,7 +106,7 @@
 | --- | --- | --- |
 | Обязательные параметры |   
 | apiKey | expertsender | ExpertSender API-ключ. (см. раздел [Доступы](https://github.com/OWOX/BigQuery-integrations/blob/master/expertsender/README_RU.md#Доступы)).|
-| apiAdress | expertsender | ExpertSender APIv2 адресс: Настройки → Субаккаунт → API → Your APIv2 address |
+| apiAddress | expertsender | ExpertSender APIv2 адресс: Настройки → Субаккаунт → API → Your APIv2 address |
 | date | expertsender | Дата запрашиваемых данных. Должна быть в формате YYYY-MM-DD. |
 | entities | expertsender | Список сущностей в ExpertSender, которые необходимо импортировать в BigQuery. В примере приведен полный список возможных значений. |
 | project_id | bq | Название проекта в BigQuery, куда будет загружена таблица. Проект может отличаться от того, в котором создана Cloud-функция. |
@@ -162,7 +162,7 @@ curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/expertsender/ -H "Cont
  '{
    "expertsender": {
       "apiKey": "ExprtSender API key",
-      "apiAdress": "ExpertSender APIv2 address",
+      "apiAddress": "ExpertSender APIv2 address",
       "date": "YYYY-MM-DD",
       "entities": [
          {
@@ -201,7 +201,7 @@ headers = { "Content-Type": "application/json" }
 payload = {
    "expertsender": {
       "apiKey": "ExprtSender API key",
-      "apiAdress": "ExpertSender APIv2 address",
+      "apiAddress": "ExpertSender APIv2 address",
       "date": "YYYY-MM-DD",
       "entities": [
          {
@@ -240,7 +240,7 @@ function runExpertSender() {
   payload = {
    "expertsender": {
       "apiKey": "ExprtSender API key",
-      "apiAdress": "ExpertSender APIv2 address",
+      "apiAddress": "ExpertSender APIv2 address",
       "date": "YYYY-MM-DD",
       "entities": [
          {
