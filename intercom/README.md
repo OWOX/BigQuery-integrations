@@ -1,6 +1,6 @@
 # Google BigQuery Integration with [Intercom](https://www.intercom.com/)
 
-This documantation is also available in [RU](https://github.com/OWOX/BigQuery-integrations/blob/master/intercom/README_RU.md).
+This documentation is also available in [RU](https://github.com/OWOX/BigQuery-integrations/blob/master/intercom/README_RU.md).
 
 ## About this script
 

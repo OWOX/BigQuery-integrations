@@ -1,6 +1,6 @@
 # Google BigQuery Integration with HTTPS - servers
 
-This documantation is also available in [RU](https://github.com/OWOX/BigQuery-integrations/tree/master/https/README_RU.md).
+This documentation is also available in [RU](https://github.com/OWOX/BigQuery-integrations/tree/master/https/README_RU.md).
 
 ## About this script
 

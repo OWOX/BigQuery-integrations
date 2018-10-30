@@ -1,6 +1,6 @@
 # Google BigQuery Integration with MySQL - servers
 
-This documantation is also available in [RU](https://github.com/OWOX/BigQuery-integrations/blob/master/mysql/README_RU.md).
+This documentation is also available in [RU](https://github.com/OWOX/BigQuery-integrations/blob/master/mysql/README_RU.md).
 
 ## About this script
 

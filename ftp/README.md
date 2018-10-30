@@ -1,11 +1,11 @@
 # Google BigQuery Integration with FTP - servers
 
+This documentation is also available in [RU](https://github.com/OWOX/BigQuery-integrations/blob/master/ftp/README_RU.md).
+
 ## About this script
 
 The **ftp-bq-integration** module lets you automatically upload data from the regularly updated file on an FTP server 
 to Google BigQuery using Google Cloud Functions.
-
-This documantation is also available in [RU](https://github.com/OWOX/BigQuery-integrations/blob/master/ftp/README_RU.md).
 
 
 ## How it works
