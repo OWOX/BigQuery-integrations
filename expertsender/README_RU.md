@@ -73,7 +73,7 @@
 {
    "expertsender": {
       "apiKey": "ExprtSender API key",
-      "apiAdress": "ExpertSender APIv2 adress",
+      "apiAdress": "ExpertSender APIv2 address",
       "date": "2018-10-10",
       "entities": [
          {
@@ -162,7 +162,7 @@ curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/expertsender/ -H "Cont
  '{
    "expertsender": {
       "apiKey": "ExprtSender API key",
-      "apiAdress": "ExpertSender APIv2 adress",
+      "apiAdress": "ExpertSender APIv2 address",
       "date": "2018-10-10",
       "entities": [
          {
@@ -201,7 +201,7 @@ headers = { "Content-Type": "application/json" }
 payload = {
    "expertsender": {
       "apiKey": "ExprtSender API key",
-      "apiAdress": "ExpertSender APIv2 adress",
+      "apiAdress": "ExpertSender APIv2 address",
       "date": "2018-10-10",
       "entities": [
          {
@@ -240,7 +240,7 @@ function runExpertSender() {
   payload = {
    "expertsender": {
       "apiKey": "ExprtSender API key",
-      "apiAdress": "ExpertSender APIv2 adress",
+      "apiAdress": "ExpertSender APIv2 address",
       "date": "2018-10-10",
       "entities": [
          {
