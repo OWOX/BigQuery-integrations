@@ -21,7 +21,7 @@ def get_file_mysql(mysql_configuration):
 
         with open(file_name, "w") as output_file:
             for row in results:
-                output_file.write(json.dumps(row) + "\n")
+                output_file.write(json.dumps(row, default = str) + "\n")
 
         file_location = gc_write_dir + "/" + file_name
         print("Query <" + mysql_configuration["query"] + "> has completed successfully.")
