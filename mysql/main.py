@@ -1,6 +1,6 @@
 from google.cloud import bigquery
 from mysql.connector import connect
-import os
+import os, json
 
 # writeable part of the filesystem for Cloud Functions instance
 gc_write_dir = "/tmp"
