@@ -1,6 +1,6 @@
 from google.cloud import bigquery
-from mysql.connector import connect
-import os, json
+from MySQLdb import connect, cursors
+import os
 
 # writeable part of the filesystem for Cloud Functions instance
 gc_write_dir = "/tmp"
@@ -12,9 +12,10 @@ def get_file_mysql(mysql_configuration):
     """
     # construct MySQLConnection object and query table on a server
     try:
-        cnx = connect(user = mysql_configuration["user"], password = mysql_configuration["psswd"], host = mysql_configuration["host"],
-                                      database = mysql_configuration["database"], port = mysql_configuration["port"] )
-        cursor = cnx.cursor(dictionary = True)
+        cnx = connect(user = mysql_configuration["user"], passwd = mysql_configuration["psswd"], host = mysql_configuration["host"],
+                      db = mysql_configuration["database"], port = mysql_configuration["port"],
+                      cursorclass= cursors.DictCursor )
+        cursor = cnx.cursor()
         cursor.execute(mysql_configuration["query"])
         results = cursor.fetchall()
         file_name = "mysql.txt"
