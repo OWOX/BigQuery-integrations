@@ -1,2 +1,2 @@
 google-cloud-bigquery
-mysql-connector-python-rf
+mysqlclient
