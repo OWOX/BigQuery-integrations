@@ -4,7 +4,7 @@
 
 Модуль **amocrm-bq-integration** предназначен для автоматизации передачи данных из amoCRM в Google BigQuery с помощью Google Cloud функции.
 В настоящее время модуль позволяет импортировать из amoCRM в Google BigQuery такие сущности, как: account, leads, customers, contacts,
-companies, catalogs, catalog_elements, customers_periods
+companies, catalogs, catalog_elements, customers_periods.
 
 ## Принцип работы
 
