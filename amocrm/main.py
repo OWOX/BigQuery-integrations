@@ -1,47 +1,7 @@
-"""
-{
-    "amocrm":
-            {
-                "user": "serhii.kravchenko@owox.com",
-                "apiKey": "5cfc23eaaa707fa9b197023f1162217e39f5af99",
-                "apiAddress": "https://serhiikravchenko.amocrm.ru",
-                "entities": [
-                                "leads",
-                                "contacts",
-                                "customers",
-                                "companies",
-                                "catalogs",
-                                "catalog_elements",
-                                "account",
-                                "customers_periods"
-                            ]
-            },
-    "bq":
-            {
-                "project_id": "owox-analytics",
-                "dataset_id": "amocrm",
-                "location": "US"
-            }
-
-}
-"""
-
 from google.cloud import bigquery
 
 import os, io
-import json
-
-# will be deleted
-import requests
-
-def slack_notification(message):
-    slackURI = "https://hooks.slack.com/services/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"
-    playload = {
-        "username": "amocrm integration",
-        "text": message
-    }
-    #req = requests.post(slackURI, data = json.dumps(playload))
-    print("All notifications have been sent.")
+import json, requests
 
 def load_to_gbq(client, data, bq_configuration):
     """
@@ -53,7 +13,6 @@ def load_to_gbq(client, data, bq_configuration):
 
     # determine uploading options
     job_config = bigquery.LoadJobConfig()
-    #job_config.schema_update_options = [bigquery.SchemaUpdateOption.ALLOW_FIELD_ADDITION]
     job_config.write_disposition = 'WRITE_TRUNCATE'
     job_config.source_format = "NEWLINE_DELIMITED_JSON"
     job_config.autodetect = True
@@ -180,7 +139,6 @@ def amocrm(request):
     except Exception as error:
         message = "An error occurred with POST request data. Details: " + os.linesep + str(error)
         print(message)
-        slack_notification(message)
         raise SystemExit
 
     try:
@@ -191,7 +149,6 @@ def amocrm(request):
     except Exception as error:
         message = "Authorization error occurred. " + os.linesep + str(error)
         print(message)
-        slack_notification(message)
         raise SystemExit
 
     for entity in amocrm_configuration["entities"]:
@@ -209,6 +166,5 @@ def amocrm(request):
         except Exception as error:
             message = "An error occurred trying to process " + entity + os.linesep + str(error)
             print(message)
-            slack_notification(message)
 
     print("All tasks have been completed.")
