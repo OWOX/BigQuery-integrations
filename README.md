@@ -9,6 +9,7 @@ BigQuery-integrations is a set of Python scripts that let you automate data impo
 
 The current version of BigQuery-integrations features scripts for importing from:
 
+- [amoCRM](https://github.com/OWOX/BigQuery-integrations/tree/master/amocrm);
 - [FTP](https://github.com/OWOX/BigQuery-integrations/tree/master/ftp);
 - [FTPS](https://github.com/OWOX/BigQuery-integrations/tree/master/ftps);
 - [HTTP(s)](https://github.com/OWOX/BigQuery-integrations/tree/master/https);
@@ -37,7 +38,7 @@ To launch the scripts, follow the steps described in the readme files in the fun
 You don’t need to edit the functions’ code.
 The detailed documentation for each function is by the links below:
 
-
+- [amoCRM (RU)](https://github.com/OWOX/BigQuery-integrations/tree/master/amocrm/README_RU.md);
 - [FTP](https://github.com/OWOX/BigQuery-integrations/tree/master/ftp/README.md);
 - [FTPS](https://github.com/OWOX/BigQuery-integrations/tree/master/ftps/README.md);
 - [HTTP(s)](https://github.com/OWOX/BigQuery-integrations/tree/master/https/README.md);
