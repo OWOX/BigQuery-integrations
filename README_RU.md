@@ -7,6 +7,7 @@ BigQuery-integrations — содержит набор python-скриптов д
 
 В текущей версии подготовлены скрипты для автоматизации импорта данных в Google BigQuery из таких источников, как:
 
+- [amoCRM](https://github.com/OWOX/BigQuery-integrations/tree/master/amocrm);
 - [FTP](https://github.com/OWOX/BigQuery-integrations/tree/master/ftp);
 - [FTPS](https://github.com/OWOX/BigQuery-integrations/tree/master/ftps);
 - [HTTP(s)](https://github.com/OWOX/BigQuery-integrations/tree/master/https);
@@ -37,6 +38,7 @@ BigQuery-integrations — содержит набор python-скриптов д
 
 Подробная документация находится по ссылкам:
 
+- [amoCRM](https://github.com/OWOX/BigQuery-integrations/tree/master/amocrm/README_RU.md);
 - [FTP](https://github.com/OWOX/BigQuery-integrations/tree/master/ftp/README_RU.md);
 - [FTPS](https://github.com/OWOX/BigQuery-integrations/tree/master/ftps/README_RU.md);
 - [HTTP(s)](https://github.com/OWOX/BigQuery-integrations/tree/master/https/README_RU.md);
