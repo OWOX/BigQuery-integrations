@@ -164,7 +164,7 @@ def amocrm(request):
         if authorization.status_code != 200 or auth_string != "true":
             message = "Authorization error occurred. Code: " + str(authorization.status_code) + os.linesep
             message += "Details: " + auth_string + os.linesep
-            message += "Full response content: " + os.linesep + authorization.content
+            message += "Full response content: " + os.linesep + str(authorization.content)
             print(message)
             raise SystemExit
 
