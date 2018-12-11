@@ -148,7 +148,7 @@ def amocrm(request):
 
         xml_response = etree.fromstring(authorization.content)
 
-        if authorization.status_code != 200 or xml_response.find("auth").text == 'false':
+        if authorization.status_code != 200 or xml_response.find("auth").text != 'true':
             message = "Authorization error occurred. Code: " + str(authorization.status_code)
             message += " Full response content: " + os.linesep + authorization.content
             print(message)
