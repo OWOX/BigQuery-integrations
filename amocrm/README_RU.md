@@ -73,7 +73,7 @@ companies, catalogs, catalog_elements, customers_periods.
     "amocrm": {
         "user": "login@amocrm",
         "apiKey": "amoCRM API key",
-        "apiAddress": "https://example.amocrm.ru",
+        "apiAddress": "https://example.amocrm.ru/",
         "entities": [
             "leads",
             "contacts",
@@ -144,7 +144,7 @@ curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/amocrm/ -H "Content-Ty
     "amocrm": {
         "user": "login@amocrm",
         "apiKey": "amoCRM API key",
-        "apiAddress": "https://example.amocrm.ru",
+        "apiAddress": "https://example.amocrm.ru/",
         "entities": [
             "leads",
             "contacts",
@@ -176,7 +176,7 @@ payload = {
     "amocrm": {
         "user": "login@amocrm",
         "apiKey": "amoCRM API key",
-        "apiAddress": "https://example.amocrm.ru",
+        "apiAddress": "https://example.amocrm.ru/",
         "entities": [
             "leads",
             "contacts",
@@ -208,7 +208,7 @@ function runAmoCrm() {
     "amocrm": {
         "user": "login@amocrm",
         "apiKey": "amoCRM API key",
-        "apiAddress": "https://example.amocrm.ru",
+        "apiAddress": "https://example.amocrm.ru/",
         "entities": [
             "leads",
             "contacts",
