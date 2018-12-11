@@ -142,8 +142,14 @@ def amocrm(request):
         raise SystemExit
 
     try:
-        authorization = requests.post(amocrm_configuration["apiAddress"] + "/private/api/auth.php", data = auth_payload)
+        authorization = requests.post(amocrm_configuration["apiAddress"] + "private/api/auth.php", data = auth_payload)
         auth_cookies = authorization.cookies
+        
+        if authorization.status_code != 200:
+            error_response = authorization.json()
+            message = "Authorization error occurred. Error: " + error_response.get('response', {}).get('error') + os.linesep
+            message += "Code: " + str(error_response.get('response', {}).get('error_code'))
+            print(message)
 
         client = bigquery.Client(project = bq_configuration["project_id"])
     except Exception as error:
