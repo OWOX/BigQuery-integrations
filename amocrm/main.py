@@ -1,4 +1,5 @@
 from google.cloud import bigquery
+from lxml import etree
 
 import os, io
 import json, requests
@@ -144,12 +145,14 @@ def amocrm(request):
     try:
         authorization = requests.post(amocrm_configuration["apiAddress"] + "private/api/auth.php", data = auth_payload)
         auth_cookies = authorization.cookies
-        
-        if authorization.status_code != 200:
-            error_response = authorization.json()
-            message = "Authorization error occurred. Error: " + error_response.get('response', {}).get('error') + os.linesep
-            message += "Code: " + str(error_response.get('response', {}).get('error_code'))
+
+        xml_response = etree.fromstring(authorization.content)
+
+        if authorization.status_code != 200 or xml_response.find("auth").text == 'false':
+            message = "Authorization error occurred. Code: " + str(authorization.status_code)
+            message += " Full response content: " + os.linesep + authorization.content
             print(message)
+            raise SystemExit
 
         client = bigquery.Client(project = bq_configuration["project_id"])
     except Exception as error:
