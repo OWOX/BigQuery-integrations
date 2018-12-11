@@ -156,7 +156,7 @@ def amocrm(request):
                 auth_response = authorization.json()
                 auth_string = auth_response.get("response", {}).get("auth")
                 if auth_string != "true":
-                    auth_string = auth_response.get("response", {}).get("error") + os.linesep
+                    auth_string = str(auth_response.get("response", {}).get("error")) + os.linesep
                     auth_string += "Error code: " + str(auth_response.get("response", {}).get("error"))
             except Exception:
                 auth_string = "error"
