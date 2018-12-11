@@ -144,15 +144,31 @@ def amocrm(request):
 
     try:
         authorization = requests.post(amocrm_configuration["apiAddress"] + "private/api/auth.php", data = auth_payload)
-        auth_cookies = authorization.cookies
 
-        xml_response = etree.fromstring(authorization.content)
+        try:
+            auth_response = etree.fromstring(authorization.content)
+            auth_string = auth_response.find("auth").text
+            if auth_string != "true":
+                auth_string = "error"
 
-        if authorization.status_code != 200 or xml_response.find("auth").text != 'true':
-            message = "Authorization error occurred. Code: " + str(authorization.status_code)
-            message += " Full response content: " + os.linesep + authorization.content
+        except Exception:
+            try:
+                auth_response = authorization.json()
+                auth_string = auth_response.get("response", {}).get("auth")
+                if auth_string != "true":
+                    auth_string = auth_response.get("response", {}).get("error") + os.linesep
+                    auth_string += "Error code: " + str(auth_response.get("response", {}).get("error"))
+            except Exception:
+                auth_string = "error"
+
+        if authorization.status_code != 200 or auth_string != "true":
+            message = "Authorization error occurred. Code: " + str(authorization.status_code) + os.linesep
+            message += "Details: " + auth_string + os.linesep
+            message += "Full response content: " + os.linesep + authorization.content
             print(message)
             raise SystemExit
+
+        auth_cookies = authorization.cookies
 
         client = bigquery.Client(project = bq_configuration["project_id"])
     except Exception as error:
