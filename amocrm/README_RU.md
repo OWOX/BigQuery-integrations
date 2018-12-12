@@ -170,7 +170,7 @@ curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/amocrm/ -H "Content-Ty
 from urllib import urlencode
 from httplib2 import Http
 
-trigger_url = "https://REGION-PROJECT_ID.cloudfunctions.net/expertsender/"
+trigger_url = "https://REGION-PROJECT_ID.cloudfunctions.net/amocrm/"
 headers = { "Content-Type": "application/json" }
 payload = {
     "amocrm": {
