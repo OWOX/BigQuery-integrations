@@ -177,7 +177,7 @@ try:
 except ImportError:
     from urllib.parse import urlencode
 
-trigger_url = "https://REGION-PROJECT_ID.cloudfunctions.net/amocrm/"
+trigger_url = "https://REGION-PROJECT_ID.cloudfunctions.net/ftp/"
 
 headers = {"Content-Type": "application/json; charset=UTF-8"}
 
