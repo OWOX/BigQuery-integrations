@@ -178,7 +178,7 @@ except ImportError:
 
 trigger_url = "https://REGION-PROJECT_ID.cloudfunctions.net/amocrm/"
 
-headers = {"Content-Type": 'application/json; charset=UTF-8'}
+headers = {"Content-Type": "application/json; charset=UTF-8"}
 payload = {
     "amocrm": {
         "user": "login@amocrm",
