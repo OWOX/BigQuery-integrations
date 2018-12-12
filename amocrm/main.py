@@ -33,7 +33,7 @@ def entities(amocrm_configuration, auth_cookies, entity):
     response = True
     offset = 0
     data_dumps = ''
-    http = amocrm_configuration["apiAddress"] + "/api/v2/" + entity
+    http = amocrm_configuration["apiAddress"] + "api/v2/" + entity
 
     while response:
         payload = {
@@ -76,7 +76,7 @@ def account(amocrm_configuration, auth_cookies):
     data_entity = []
     statuses = []
 
-    http = amocrm_configuration["apiAddress"] + "/api/v2/account"
+    http = amocrm_configuration["apiAddress"] + "api/v2/account"
 
     payload = {
         "with": "users,pipelines,groups"
