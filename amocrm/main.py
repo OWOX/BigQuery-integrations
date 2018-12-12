@@ -42,12 +42,21 @@ def entities(amocrm_configuration, auth_cookies, entity):
         }
 
         request = requests.get(http, cookies = auth_cookies, params = payload)
+        
         offset += 500
 
         if request.status_code != 200:
             break
 
         response = request.json()
+        
+        if response.get("title") == "Error":
+            message = "An error occurred with data access in amoCRM. "
+            message += str(response.get("detail"))
+            print(message)
+            return
+        
+        
         if not response.get("_embedded", {}).get("items"):
             break
 
@@ -88,7 +97,13 @@ def account(amocrm_configuration, auth_cookies):
         response = request.json()
     else:
         return
-
+    
+    if response.get("title") == "Error":
+        message = "An error occurred with data access in amoCRM. "
+        message += str(response.get("detail"))
+        print(message)
+        return
+    
     response.pop("_links") if response.get("_links") else None
     embedded = response.get("_embedded")
 
@@ -184,6 +199,10 @@ def amocrm(request):
                 amocrm_data = entities(amocrm_configuration, auth_cookies, entity)
 
             # upload file to the BigQuery
+            if not amocrm_data:
+                message = "No data returned from amoCRM API."
+                print(message)
+                continue
             file_raw = amocrm_data.encode('utf-8')
             file = io.BytesIO(file_raw)
             bq_configuration["table"] = entity
