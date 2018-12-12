@@ -167,11 +167,18 @@ curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/amocrm/ -H "Content-Ty
 ### Python
 
 ```
-from urllib import urlencode
+
 from httplib2 import Http
+import json
+
+try:
+    from urllib import urlencode
+except ImportError:
+    from urllib.parse import urlencode
 
 trigger_url = "https://REGION-PROJECT_ID.cloudfunctions.net/amocrm/"
-headers = { "Content-Type": "application/json" }
+
+headers = {"Content-Type": 'application/json; charset=UTF-8'}
 payload = {
     "amocrm": {
         "user": "login@amocrm",
@@ -194,7 +201,7 @@ payload = {
       "location": "US"
    }
 }
-Http().request(trigger_url, "POST", urlencode(payload), headers = headers)
+Http().request(method = "POST", uri = trigger_url, body = json.dumps(payload), headers = headers)
 ```
 
 ### [Google Apps Script](https://developers.google.com/apps-script/)
