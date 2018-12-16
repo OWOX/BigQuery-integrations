@@ -98,7 +98,7 @@ companies, catalogs, catalog_elements, customers_periods.
 | Обязательные параметры |  
 | user | amocrm | Логин пользователя - e-mail.| 
 | apiKey | amocrm | amoCRM API-ключ. (см. раздел [Доступы](https://github.com/OWOX/BigQuery-integrations/blob/master/amocrm/README_RU.md#Доступы)).|
-| apiAddress | amocrm | API адресс: имя хоста для пользователя в системе. Напрмиер, если текущей страницей в системе является https://example.amocrm.ru/dashboard/, то в качестве адресса необходимо указать https://example.amocrm.ru/ |
+| apiAddress | amocrm | API адресс: имя хоста для пользователя в системе. Например, если текущей страницей в системе является https://example.amocrm.ru/dashboard/, то в качестве адресса необходимо указать https://example.amocrm.ru/ |
 | entities | amocrm | Список сущностей в amoCRM, которые необходимо импортировать в BigQuery. В примере приведен полный список возможных значений. |
 | project_id | bq | Название проекта в BigQuery, куда будет загружена таблица. Проект может отличаться от того, в котором создана Cloud-функция. |
 | dataset_id | bq | Название датасета в BigQuery, куда будет загружена таблица. |
