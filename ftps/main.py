@@ -13,6 +13,7 @@ def get_file_ftps(host, path_to_file, ftps_configuration):
     # Construct FTP object and get the file on a server
     with ftplib.FTP_TLS(host, user = ftps_configuration["user"], passwd = ftps_configuration["psswd"]) as ftps:
         filename = re.findall("[^/]*$", path_to_file)[0]
+        ftps.prot_p()
         with open(filename, "wb") as wf:
             ftps.retrbinary("RETR " + filename, wf.write)
 
