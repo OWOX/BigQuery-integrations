@@ -131,6 +131,7 @@ companies, catalogs, catalog_elements, customers_periods.
         "contacts"
       ]
 ```
+3. Атрибут *company* сущности *leads* в текущей версии скрипта не поддерживается.
 
 ## Пример использования
 
