@@ -69,6 +69,9 @@ def entities(amocrm_configuration, auth_cookies, entity):
 
             if entity == "customers_periods" and element.get("conditions"):
                 element["conditions"] = element["conditions"][0]
+            
+            if entity == "leads" and element.get("company"):
+                element.pop("company")
 
             data_dumps += json.dumps(element) + os.linesep
 
