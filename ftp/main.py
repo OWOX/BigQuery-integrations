@@ -35,7 +35,7 @@ def give_file_gbq(path_to_file, bq_configuration):
     job_config.source_format = bq_configuration["source_format"].upper()
     job_config.write_disposition = bq_configuration["write_disposition"]
     if bq_configuration["source_format"].upper() == "CSV":
-        job_config.fieldDelimiter = bq_configuration["delimiter"]
+        job_config.field_delimiter = bq_configuration["delimiter"]
         job_config.skip_leading_rows = 1
     job_config.autodetect = True
 
