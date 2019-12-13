@@ -1,7 +1,7 @@
 from google.cloud import bigquery
 from lxml import etree
 
-import os, io
+import os, io, re
 import json, requests
 
 def load_to_gbq(client, data, bq_configuration):
@@ -72,8 +72,21 @@ def entities(amocrm_configuration, auth_cookies, entity):
             
             if entity == "leads" and element.get("company"):
                 element.pop("company")
+            
+            if entity == "contacts":
+                if "first_name" not in element: 
+                    element["first_name"] = "" 
+                if "last_name" not in element: 
+                    element["last_name"] = "" 
+            
+            buf = json.dumps(element, ensure_ascii = False)
+            buf = buf.replace('{}', 'null')
+            
+            res = re.findall('\"[\d]+\"', buf)
+            for sub in list(set(res)):
+                buf = buf.replace(sub, '"id_' + sub[1:])
 
-            data_dumps += json.dumps(element) + os.linesep
+            data_dumps += buf + os.linesep
 
         if entity in ("catalogs", "customers_periods"):
             break
@@ -132,7 +145,12 @@ def account(amocrm_configuration, auth_cookies):
     response.pop("_embedded")
     response.update(result)
 
-    return json.dumps(response)
+    buf = json.dumps(response, ensure_ascii = False)
+    res = re.findall('\"[\d]+\"', buf)
+    for sub in list(set(res)):
+        buf = buf.replace(sub, '"id_' + sub[1:])
+    
+    return buf
 
 
 def amocrm(request):
