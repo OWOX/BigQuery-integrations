@@ -1,3 +1,5 @@
+# DEPRECATED AND NOT MAINTAINED
+
 # BigQuery-integrations
 Import files (data) from Intercom, FTP(S), SFTP, MySQL, etc. servers into BigQuery.
 
@@ -47,6 +49,3 @@ The detailed documentation for each function is by the links below:
 - [MySQL](https://github.com/OWOX/BigQuery-integrations/tree/master/mysql/README.md);
 - [SFTP](https://github.com/OWOX/BigQuery-integrations/tree/master/sftp/README.md).
 
-## Questions
-
-If you have any questions on the BigQuery-integrations scripts, write us at analytics-dev@owox.com.
